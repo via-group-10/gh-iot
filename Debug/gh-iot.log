@@ -1,0 +1,3 @@
+﻿  main.c
+D:\学习资料\VIA\Study skills for engineers (SSE)&(SEP)\4th semester\gh-iot\FreeRTOS\Source\include\task.h(2545,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  gh-iot.vcxproj -> D:\学习资料\VIA\Study skills for engineers (SSE)&(SEP)\4th semester\gh-iot\Debug\gh-iot.exe
