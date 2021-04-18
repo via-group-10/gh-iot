@@ -57,16 +57,15 @@
     <avrtoolinterface>JTAG</avrtoolinterface>
     <avrtoolinterfaceclock>200000</avrtoolinterfaceclock>
     <com_atmel_avrdbg_tool_simulator>
-      <ToolOptions xmlns="">
+      <ToolOptions>
         <InterfaceProperties>
         </InterfaceProperties>
-        <InterfaceName>
-        </InterfaceName>
+        <InterfaceName>JTAG</InterfaceName>
       </ToolOptions>
-      <ToolType xmlns="">com.atmel.avrdbg.tool.simulator</ToolType>
-      <ToolNumber xmlns="">
+      <ToolType>com.atmel.avrdbg.tool.simulator</ToolType>
+      <ToolNumber>
       </ToolNumber>
-      <ToolName xmlns="">Simulator</ToolName>
+      <ToolName>Simulator</ToolName>
     </com_atmel_avrdbg_tool_simulator>
     <custom>
       <ToolOptions xmlns="">
@@ -171,6 +170,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="controller\temperatureSensorController.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="controller\temperatureSensorController.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="drivers\display_7seg.h">
       <SubType>compile</SubType>
     </Compile>
@@ -217,6 +222,18 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="drivers\twi.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\senser\temperatureSensor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\senser\temperatureSensor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\sensorModelManager.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\sensorModelManager.h">
       <SubType>compile</SubType>
     </Compile>
     <None Include="FreeRTOS\Example\main.c">
@@ -314,12 +331,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="controller\" />
     <Folder Include="drivers\" />
     <Folder Include="drivers\Example\" />
     <Folder Include="FreeRTOS\" />
     <Folder Include="FreeRTOS\Example\" />
     <Folder Include="FreeRTOS\FreeRTOSTraceDriver\" />
     <Folder Include="FreeRTOS\src\" />
+    <Folder Include="model" />
+    <Folder Include="model\senser" />
   </ItemGroup>
   <ItemGroup>
     <None Include="drivers\.git">
