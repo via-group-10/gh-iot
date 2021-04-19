@@ -27,8 +27,9 @@ void task(void *pvParameters)
 		temperature = hih8120_getTemperature();
 		temperatureSensor_setValue(sensor,temperature);
 		//print temperature (the print of float is ?, so print it as int)
-		int a = temperatureSensor_getValue(sensor)*1000;
-		printf("temperature:%d",a);
+		int a = temperatureSensor_getValue(sensor);
+		int b = temperatureSensor_getValue(sensor)*10000-a*10000;
+		printf("temperature:%d.%d",a,b);
 	}
 }
 
