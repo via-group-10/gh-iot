@@ -170,6 +170,18 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="controller\CO2SensorController.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="controller\CO2SensorController.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="controller\HumSensorController.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="controller\HumSensorController.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="controller\sevenSegmentDisplayController.c">
       <SubType>compile</SubType>
     </Compile>
