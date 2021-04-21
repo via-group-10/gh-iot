@@ -41,14 +41,19 @@ SUBDIRS :=  \
 ../FreeRTOS/FreeRTOSTraceDriver/ \
 ../FreeRTOS/src/ \
 ../model \
+../model/time \
 ../model/senser
 
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
+../controller/sevenSegmentDisplayController.c \
 ../controller/temperatureSensorController.c \
+../model/senser/carbonDioxideSensor.c \
+../model/senser/humiditySensor.c \
 ../model/senser/temperatureSensor.c \
 ../model/sensorModelManager.c \
+../model/time/myTime.c \
 ../FreeRTOS/FreeRTOSTraceDriver/FreeRTOSTraceDriver.c \
 ../FreeRTOS/src/croutine.c \
 ../FreeRTOS/src/event_groups.c \
@@ -71,9 +76,13 @@ ASM_SRCS +=
 
 
 OBJS +=  \
+controller/sevenSegmentDisplayController.o \
 controller/temperatureSensorController.o \
+model/senser/carbonDioxideSensor.o \
+model/senser/humiditySensor.o \
 model/senser/temperatureSensor.o \
 model/sensorModelManager.o \
+model/time/myTime.o \
 FreeRTOS/FreeRTOSTraceDriver/FreeRTOSTraceDriver.o \
 FreeRTOS/src/croutine.o \
 FreeRTOS/src/event_groups.o \
@@ -89,9 +98,13 @@ LoRaWANHandler.o \
 main.o
 
 OBJS_AS_ARGS +=  \
+controller/sevenSegmentDisplayController.o \
 controller/temperatureSensorController.o \
+model/senser/carbonDioxideSensor.o \
+model/senser/humiditySensor.o \
 model/senser/temperatureSensor.o \
 model/sensorModelManager.o \
+model/time/myTime.o \
 FreeRTOS/FreeRTOSTraceDriver/FreeRTOSTraceDriver.o \
 FreeRTOS/src/croutine.o \
 FreeRTOS/src/event_groups.o \
@@ -107,9 +120,13 @@ LoRaWANHandler.o \
 main.o
 
 C_DEPS +=  \
+controller/sevenSegmentDisplayController.d \
 controller/temperatureSensorController.d \
+model/senser/carbonDioxideSensor.d \
+model/senser/humiditySensor.d \
 model/senser/temperatureSensor.d \
 model/sensorModelManager.d \
+model/time/myTime.d \
 FreeRTOS/FreeRTOSTraceDriver/FreeRTOSTraceDriver.d \
 FreeRTOS/src/croutine.d \
 FreeRTOS/src/event_groups.d \
@@ -125,9 +142,13 @@ LoRaWANHandler.d \
 main.d
 
 C_DEPS_AS_ARGS +=  \
+controller/sevenSegmentDisplayController.d \
 controller/temperatureSensorController.d \
+model/senser/carbonDioxideSensor.d \
+model/senser/humiditySensor.d \
 model/senser/temperatureSensor.d \
 model/sensorModelManager.d \
+model/time/myTime.d \
 FreeRTOS/FreeRTOSTraceDriver/FreeRTOSTraceDriver.d \
 FreeRTOS/src/croutine.d \
 FreeRTOS/src/event_groups.d \
@@ -156,7 +177,28 @@ LINKER_SCRIPT_DEP+=
 
 
 # AVR32/GNU C Compiler
+controller/sevenSegmentDisplayController.o: ../controller/sevenSegmentDisplayController.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../drivers" -I"../FreeRTOS/src"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 controller/temperatureSensorController.o: ../controller/temperatureSensorController.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../drivers" -I"../FreeRTOS/src"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+model/senser/carbonDioxideSensor.o: ../model/senser/carbonDioxideSensor.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../drivers" -I"../FreeRTOS/src"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+model/senser/humiditySensor.o: ../model/senser/humiditySensor.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../drivers" -I"../FreeRTOS/src"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
@@ -171,6 +213,13 @@ model/senser/temperatureSensor.o: ../model/senser/temperatureSensor.c
 	
 
 model/sensorModelManager.o: ../model/sensorModelManager.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../drivers" -I"../FreeRTOS/src"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+model/time/myTime.o: ../model/time/myTime.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../drivers" -I"../FreeRTOS/src"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

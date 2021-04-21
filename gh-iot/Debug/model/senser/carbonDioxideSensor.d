@@ -1,6 +1,6 @@
-model/senser/temperatureSensor.d model/senser/temperatureSensor.o: \
- ../model/senser/temperatureSensor.c ../model/senser/temperatureSensor.h \
- ../model/senser/../time/myTime.h \
+model/senser/carbonDioxideSensor.d model/senser/carbonDioxideSensor.o: \
+ ../model/senser/carbonDioxideSensor.c \
+ ../model/senser/carbonDioxideSensor.h ../model/senser/../time/myTime.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../FreeRTOS/src/ATMEGA_FreeRTOS.h \
@@ -23,7 +23,7 @@ model/senser/temperatureSensor.d model/senser/temperatureSensor.o: \
  ../FreeRTOS/src/ATMEGA_FreeRTOS.h ../FreeRTOS/src/task.h \
  ../FreeRTOS/src/list.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h
 
-../model/senser/temperatureSensor.h:
+../model/senser/carbonDioxideSensor.h:
 
 ../model/senser/../time/myTime.h:
 

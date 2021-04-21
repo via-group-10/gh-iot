@@ -2,11 +2,19 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+controller\sevenSegmentDisplayController.c
+
 controller\temperatureSensorController.c
+
+model\senser\carbonDioxideSensor.c
+
+model\senser\humiditySensor.c
 
 model\senser\temperatureSensor.c
 
 model\sensorModelManager.c
+
+model\time\myTime.c
 
 FreeRTOS\FreeRTOSTraceDriver\FreeRTOSTraceDriver.c
 

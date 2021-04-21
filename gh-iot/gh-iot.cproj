@@ -170,6 +170,12 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="controller\sevenSegmentDisplayController.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="controller\sevenSegmentDisplayController.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="controller\temperatureSensorController.c">
       <SubType>compile</SubType>
     </Compile>
@@ -224,6 +230,18 @@
     <Compile Include="drivers\twi.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="model\senser\carbonDioxideSensor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\senser\carbonDioxideSensor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\senser\humiditySensor.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\senser\humiditySensor.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="model\senser\temperatureSensor.c">
       <SubType>compile</SubType>
     </Compile>
@@ -234,6 +252,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="model\sensorModelManager.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\time\myTime.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\time\myTime.h">
       <SubType>compile</SubType>
     </Compile>
     <None Include="FreeRTOS\Example\main.c">
@@ -339,6 +363,7 @@
     <Folder Include="FreeRTOS\FreeRTOSTraceDriver\" />
     <Folder Include="FreeRTOS\src\" />
     <Folder Include="model" />
+    <Folder Include="model\time" />
     <Folder Include="model\senser" />
   </ItemGroup>
   <ItemGroup>

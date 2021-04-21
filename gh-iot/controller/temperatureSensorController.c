@@ -1,5 +1,6 @@
 #include "temperatureSensorController.h"
 #include "../model/senser/temperatureSensor.h"
+#include "../model/time/myTime.h"
 #include <stdio.h>
 #include <hih8120.h>
 #include <ATMEGA_FreeRTOS.h>
@@ -8,19 +9,26 @@
 float temperature = 0.0;
 temperatureSensor_t sensor;
 
-void task(void *pvParameters)
+void temperatureSensorController_task(void *pvParameters)
 {
 	for(;;)
 	{
+		if ( HIH8120_OK != hih8120_wakeup() )
+		{
+			printf("Temperature sensor didn't wakeup!!!");
+		}
+		
+		//wait sensor to wakeup
+		vTaskDelay(pdMS_TO_TICKS(temperatureSensor_getReportInterval(sensor)*500));
+		PORTA ^= _BV(PA0);
+		
 		if ( HIH8120_OK !=  hih8120_measure() )
 		{
-			printf("something wrong on temperature sensor");
-			// Something went wrong
-			// Investigate the return code further
+			printf("Temperature sensor didn't measure!!!");
 		}
 		
 		//wait sensor to get the value
-		vTaskDelay(pdMS_TO_TICKS(temperatureSensor_getReportInterval(sensor)*1000));
+		vTaskDelay(pdMS_TO_TICKS(temperatureSensor_getReportInterval(sensor)*500));
 		PORTA ^= _BV(PA0);
 		
 		//save new value
@@ -29,7 +37,8 @@ void task(void *pvParameters)
 		//print temperature (the print of float is ?, so print it as int)
 		int a = temperatureSensor_getValue(sensor);
 		int b = temperatureSensor_getValue(sensor)*10000-a*10000;
-		printf("temperature:%d.%d",a,b);
+		myTime_t time = temperatureSensor_getUpdateTime(sensor);
+		printf("temperature(%d.%d.%d %d:%d:%d):%d.%d",myTime_getYear(time), myTime_getMon(time), myTime_getDay(time), myTime_getHour(time), myTime_getMin(time), myTime_getSec(time),a,b);
 	}
 }
 
@@ -39,7 +48,7 @@ void temperatureSensorController_create(temperatureSensor_t temperatureSensor)
 	{
 		sensor = temperatureSensor;
 		printf("Temperature sensor started!!!\n");
-		xTaskCreate(task, "TemperatureSensorTask", configMINIMAL_STACK_SIZE, (void*)1, tskIDLE_PRIORITY + 1, NULL);
-		vTaskStartScheduler();
+		xTaskCreate(temperatureSensorController_task, "TemperatureSensorTask", configMINIMAL_STACK_SIZE, (void*)1, tskIDLE_PRIORITY + 1, NULL);
+		//vTaskStartScheduler();
 	}
 }

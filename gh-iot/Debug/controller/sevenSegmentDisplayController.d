@@ -1,9 +1,14 @@
-model/senser/temperatureSensor.d model/senser/temperatureSensor.o: \
- ../model/senser/temperatureSensor.c ../model/senser/temperatureSensor.h \
- ../model/senser/../time/myTime.h \
- d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
- d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
+controller/sevenSegmentDisplayController.d \
+ controller/sevenSegmentDisplayController.o: \
+ ../controller/sevenSegmentDisplayController.c \
+ ../controller/sevenSegmentDisplayController.h \
+ ../controller/../model/senser/temperatureSensor.h \
+ ../controller/../model/senser/../time/myTime.h \
+ ../controller/../model/senser/humiditySensor.h \
+ ../controller/../model/senser/carbonDioxideSensor.h \
+ ../controller/../model/sensorModelManager.h \
  ../FreeRTOS/src/ATMEGA_FreeRTOS.h \
+ d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
  ../FreeRTOS/src/FreeRTOSConfig.h \
@@ -21,17 +26,25 @@ model/senser/temperatureSensor.d model/senser/temperatureSensor.o: \
  ../FreeRTOS/src/FreeRTOSVariant.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h \
  ../FreeRTOS/src/ATMEGA_FreeRTOS.h ../FreeRTOS/src/task.h \
- ../FreeRTOS/src/list.h ../FreeRTOS/src/semphr.h ../FreeRTOS/src/queue.h
+ ../FreeRTOS/src/list.h ../FreeRTOS/src/task.h ../drivers/display_7seg.h \
+ d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
+ d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h
 
-../model/senser/temperatureSensor.h:
+../controller/sevenSegmentDisplayController.h:
 
-../model/senser/../time/myTime.h:
+../controller/../model/senser/temperatureSensor.h:
 
-d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
+../controller/../model/senser/../time/myTime.h:
 
-d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
+../controller/../model/senser/humiditySensor.h:
+
+../controller/../model/senser/carbonDioxideSensor.h:
+
+../controller/../model/sensorModelManager.h:
 
 ../FreeRTOS/src/ATMEGA_FreeRTOS.h:
+
+d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
 d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h:
 
@@ -75,6 +88,10 @@ d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../FreeRTOS/src/list.h:
 
-../FreeRTOS/src/semphr.h:
+../FreeRTOS/src/task.h:
 
-../FreeRTOS/src/queue.h:
+../drivers/display_7seg.h:
+
+d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
+
+d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdarg.h:

@@ -3,6 +3,7 @@ controller/temperatureSensorController.d \
  ../controller/temperatureSensorController.c \
  ../controller/temperatureSensorController.h \
  ../controller/../model/senser/temperatureSensor.h \
+ ../controller/../model/senser/../time/myTime.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdint.h \
@@ -30,6 +31,8 @@ controller/temperatureSensorController.d \
 ../controller/temperatureSensorController.h:
 
 ../controller/../model/senser/temperatureSensor.h:
+
+../controller/../model/senser/../time/myTime.h:
 
 d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
 
