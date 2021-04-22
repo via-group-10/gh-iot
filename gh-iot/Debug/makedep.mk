@@ -2,6 +2,10 @@
 # Automatically-generated file. Do not edit or delete the file
 ################################################################################
 
+controller\CO2SensorController.c
+
+controller\HumSensorController.c
+
 controller\sevenSegmentDisplayController.c
 
 controller\temperatureSensorController.c

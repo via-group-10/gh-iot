@@ -11,6 +11,7 @@
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
 #include <semphr.h>
+#include <hih8120.h>
 
 #include <stdio_driver.h>
 #include <serial.h>
@@ -44,7 +45,11 @@ void initialiseSystem()
 	PORTA ^= _BV(PA7);
 	// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
 	stdio_initialise(ser_USART0);
-	
+    mh_z19_initialise(ser_USART3);
+	if ( HIH8120_OK == hih8120_initialise() )
+	{
+	}
+
 }
 
 /*-----------------------------------------------------------*/

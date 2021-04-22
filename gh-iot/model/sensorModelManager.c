@@ -1,6 +1,6 @@
 #include "../controller/sevenSegmentDisplayController.h"
 #include "../controller/temperatureSensorController.h"
-
+#include "../controller/CO2SensorController.h"
 #include "senser/temperatureSensor.h"
 #include "senser/humiditySensor.h"
 #include "senser/carbonDioxideSensor.h"
@@ -21,10 +21,11 @@ void sensorModelManager_create()
 	
 	//create humidity sensor controller
 	humiditySensor = humiditySensor_create(1);
+	HumSensorController_create(humiditySensor);
 	
 	//create carbon dioxide sensor controller
 	carbonDioxideSensor = carbonDioxideSensor_create(1);
-	
+	CO2SensorController_create(carbonDioxideSensor);
 	vTaskStartScheduler();
 }
 

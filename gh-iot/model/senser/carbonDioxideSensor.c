@@ -6,7 +6,7 @@
 
 typedef struct carbonDioxideSensor{
 	float reportInterval;
-	float value;
+	int value;
 	SemaphoreHandle_t readWriteSemaphore;
 	myTime_t updateTime;
 } carbonDioxideSensor;
@@ -19,7 +19,7 @@ carbonDioxideSensor_t carbonDioxideSensor_create(float reportInterval)
 		return NULL;
 	}
 	newcarbonDioxideSensor->reportInterval = reportInterval;
-	newcarbonDioxideSensor->value = 0.0;
+	newcarbonDioxideSensor->value = 0;
 	newcarbonDioxideSensor->updateTime = myTime_create();
 	newcarbonDioxideSensor->readWriteSemaphore = xSemaphoreCreateBinary();
 	
@@ -34,7 +34,7 @@ void carbonDioxideSensor_setReportInterval(carbonDioxideSensor_t self,float repo
 	xSemaphoreGive(self->readWriteSemaphore);
 }
 
-void carbonDioxideSensor_setValue(carbonDioxideSensor_t self,float value)
+void carbonDioxideSensor_setValue(carbonDioxideSensor_t self,int value)
 {
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
 	self->value = value;
@@ -50,10 +50,10 @@ float carbonDioxideSensor_getReportInterval(carbonDioxideSensor_t self)
 	return result;
 }
 
-float carbonDioxideSensor_getValue(carbonDioxideSensor_t self)
+int carbonDioxideSensor_getValue(carbonDioxideSensor_t self)
 {
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
-	float result = self->value;
+	int result = self->value;
 	xSemaphoreGive(self->readWriteSemaphore);
 	return result;
 }

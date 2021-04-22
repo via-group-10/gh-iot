@@ -46,7 +46,7 @@
     <com_atmel_avrdbg_tool_atmelice>
       <ToolOptions>
         <InterfaceProperties>
-          <JtagDbgClock>200000</JtagDbgClock>
+          <JtagDbgClock>2290985</JtagDbgClock>
         </InterfaceProperties>
         <InterfaceName>JTAG</InterfaceName>
       </ToolOptions>
@@ -55,7 +55,7 @@
       <ToolName>Atmel-ICE</ToolName>
     </com_atmel_avrdbg_tool_atmelice>
     <avrtoolinterface>JTAG</avrtoolinterface>
-    <avrtoolinterfaceclock>200000</avrtoolinterfaceclock>
+    <avrtoolinterfaceclock>2290985</avrtoolinterfaceclock>
     <com_atmel_avrdbg_tool_simulator>
       <ToolOptions>
         <InterfaceProperties>
@@ -170,6 +170,18 @@
     </ToolchainSettings>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="controller\CO2SensorController.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="controller\CO2SensorController.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="controller\HumSensorController.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="controller\HumSensorController.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="controller\sevenSegmentDisplayController.c">
       <SubType>compile</SubType>
     </Compile>
