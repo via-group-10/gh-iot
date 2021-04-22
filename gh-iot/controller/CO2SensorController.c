@@ -17,17 +17,17 @@ void carbonDioxideController_task(void *pvParmeters)
 	
 	if (rc != MHZ19_OK)
 	{
-		printf("CO2 sensor does not OK");
+		printf("CO2 sensor does not OK\n");
 	}
 	rc = mh_z19_takeMeassuring();	
 	vTaskDelay(pdMS_TO_TICKS(carbonDioxideSensor_getReportInterval(carbon)*1000));
 	//
 	PORTA ^= _BV(PA2);
-	appm = mh_z19_getCo2Ppm(appm);
+	mh_z19_getCo2Ppm(&appm);
 	float u = appm;
 	int a = u;
 	int b = u*10000-a*10000;
-	printf("Carbon:%d.%d",a,b);
+	printf("Carbon:%d.%d\n",a,b);
 	carbonDioxideSensor_setValue(carbon,u);
 	myTime_t time = carbonDioxideSensor_getUpdateTime(carbon);
 	}
