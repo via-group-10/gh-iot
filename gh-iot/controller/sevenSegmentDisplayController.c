@@ -40,7 +40,7 @@ void sevenSegmentDisplayController_task(void *pvParameters)
 		//Show carbon dioxide on 7-segment Display
 		PORTA ^= _BV(PA4);
 		carbonDioxideSensor_t carbonDioxideSensor = sensorModelManager_getCarbonDioxideSensor();
-		display_7seg_display(carbonDioxideSensor_getValue(carbonDioxideSensor),2);
+		display_7seg_display(carbonDioxideSensor_getValue(carbonDioxideSensor),0);
 		vTaskDelay(pdMS_TO_TICKS(updateTime*1000));
 		PORTA ^= _BV(PA4);
 	}
