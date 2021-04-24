@@ -1,9 +1,7 @@
-/*
-* loraWANHandler.c
-*
-* Created: 12/04/2019 10:09:05
-*  Author: IHA
-*/
+#include "model/sensorModelManager.h"
+#include "model/senser/temperatureSensor.h"
+#include "model/senser/humiditySensor.h"
+#include "model/senser/carbonDioxideSensor.h"
 #include <stddef.h>
 #include <stdio.h>
 
@@ -13,23 +11,24 @@
 #include <status_leds.h>
 
 // Parameters for OTAA join - You have got these in a mail from IHA
-#define LORA_appEUI "XXXXXXXXXXXXXXX"
-#define LORA_appKEY "YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY"
+#define LORA_appEUI "9C2D2B085519EB77"
+#define LORA_appKEY "2DC29091123D1EA9C2EBA88B19181B2F"
 
 static char _out_buf[100];
 
 void lora_handler_task( void *pvParameters );
 
 static lora_driver_payload_t _uplink_payload;
+static char devEui[17]; // It is static to avoid it to occupy stack space in the task
 
 void lora_handler_initialise(UBaseType_t lora_handler_task_priority)
 {
 	xTaskCreate(
 	lora_handler_task
 	,  "LRHand"  // A name just for humans
-	,  configMINIMAL_STACK_SIZE+200  // This stack size can be checked & adjusted by reading the Stack Highwater
-	,  NULL
-	,  lora_handler_task_priority  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
+	,  configMINIMAL_STACK_SIZE  // This stack size can be checked & adjusted by reading the Stack Highwater
+	,  (void*)1
+	,  tskIDLE_PRIORITY + 2  // Priority, with 3 (configMAX_PRIORITIES - 1) being the highest, and 0 being the lowest.
 	,  NULL );
 }
 
@@ -105,6 +104,35 @@ static void _lora_setup(void)
 	}
 }
 
+void lora_handler_downlink()
+{
+	int16_t hum;
+	int16_t temp;
+	
+	lora_driver_payload_t downlinkPayload;
+	
+	//xMessageBufferReceive(downLinkMessageBufferHandle, &downlinkPayload, 2, portMAX_DELAY);
+	printf("DOWN LINK: from port: %d with %d bytes received!", downlinkPayload.portNo, downlinkPayload.len); // Just for Debug
+	if (4 == downlinkPayload.len) // Check that we have got the expected 4 bytes
+	{
+       // decode the payload into our variales
+       temp = (downlinkPayload.bytes[0] << 8) + downlinkPayload.bytes[1];
+       hum = (downlinkPayload.bytes[2] << 8) + downlinkPayload.bytes[3];
+	   
+	}
+}
+
+void decode(lora_driver_payload_t load)
+{
+	int16_t temp;
+	int16_t hum;
+	int16_t carbon;
+	temp = (load.bytes[0] << 8) + load.bytes[1];
+    hum = (load.bytes[2] << 8) + load.bytes[3];
+	carbon = (load.bytes[4] << 8) + load.bytes[5];
+	printf("|%d_%d_%d|",temp,hum,carbon);
+}
+
 /*-----------------------------------------------------------*/
 void lora_handler_task( void *pvParameters )
 {
@@ -121,28 +149,40 @@ void lora_handler_task( void *pvParameters )
 
 	_uplink_payload.len = 6;
 	_uplink_payload.portNo = 2;
-
-	TickType_t xLastWakeTime;
-	const TickType_t xFrequency = pdMS_TO_TICKS(300000UL); // Upload message every 5 minutes (300000 ms)
-	xLastWakeTime = xTaskGetTickCount();
 	
 	for(;;)
 	{
-		xTaskDelayUntil( &xLastWakeTime, xFrequency );
-
-		// Some dummy payload
-		uint16_t hum = 12345; // Dummy humidity
-		int16_t temp = 675; // Dummy temp
-		uint16_t co2_ppm = 1050; // Dummy CO2
-
-		_uplink_payload.bytes[0] = hum >> 8;
-		_uplink_payload.bytes[1] = hum & 0xFF;
-		_uplink_payload.bytes[2] = temp >> 8;
-		_uplink_payload.bytes[3] = temp & 0xFF;
+		
+		int16_t temp = temperatureSensor_getValue(sensorModelManager_getTemperatureSensor());
+		int16_t hum = humiditySensor_getValue(sensorModelManager_getHumiditySensor());
+		int16_t co2_ppm = carbonDioxideSensor_getValue(sensorModelManager_getCarbonDioxideSensor());
+		
+		_uplink_payload.bytes[0] = temp >> 8;
+		_uplink_payload.bytes[1] = temp & 0xFF;
+		_uplink_payload.bytes[2] = hum >> 8;
+		_uplink_payload.bytes[3] = hum & 0xFF;
 		_uplink_payload.bytes[4] = co2_ppm >> 8;
 		_uplink_payload.bytes[5] = co2_ppm & 0xFF;
 
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
-		printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
+		PORTA ^= _BV(PA3);
+		char *result = lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload));
+		printf("Upload Message >%s<\n", result);
+		if (result!="MAC_TX_OK")
+		{
+			// Hardware reset of LoRaWAN transceiver
+			lora_driver_resetRn2483(1);
+			vTaskDelay(2);
+			lora_driver_resetRn2483(0);
+			// Give it a chance to wakeup
+			vTaskDelay(150);
+			printf("Rejoin Network TriesLeft:>%s<\n", lora_driver_mapReturnCodeToText(lora_driver_join(LORA_OTAA)));
+			printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
+		}
+		PORTA ^= _BV(PA3);
+		decode(_uplink_payload);
+		//wait 1 min
+		vTaskDelay(pdMS_TO_TICKS(60000));
+		//lora_handler_downlink();
 	}
 }

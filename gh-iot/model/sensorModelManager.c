@@ -25,8 +25,7 @@ void sensorModelManager_create()
 	
 	//create carbon dioxide sensor controller
 	carbonDioxideSensor = carbonDioxideSensor_create(1);
-	CO2SensorController_create(carbonDioxideSensor);
-	vTaskStartScheduler();
+	CO2SensorController_create(carbonDioxideSensor);	
 }
 
 void sensorModelManager_setReportInterval(float reportInterval)

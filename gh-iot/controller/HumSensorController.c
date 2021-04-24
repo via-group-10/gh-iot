@@ -38,14 +38,14 @@ void HumSensorController_task(void *pvParameters)
 		int a = humiditySensor_getValue(humSensor);
 		int b = humiditySensor_getValue(humSensor)*10000-a*10000;
 		myTime_t time = humiditySensor_getUpdateTime(humSensor);
-		printf("Hum%d.%d",a,b);
+		//printf("Hum%d.%d",a,b);
 	}
 }
 
 void HumSensorController_create(humiditySensor_t sensor)
 {
 	humSensor = sensor;
-		printf("Humility sensor started!!!\n");
-		xTaskCreate(HumSensorController_task, "HumSensorTask", configMINIMAL_STACK_SIZE, (void*)1, tskIDLE_PRIORITY + 1, NULL);
-		//vTaskStartScheduler();
+	printf("Humility sensor started!!!\n");
+	xTaskCreate(HumSensorController_task, "HumSensorTask", configMINIMAL_STACK_SIZE, (void*)1, tskIDLE_PRIORITY + 1, NULL);
+	//vTaskStartScheduler();
 }

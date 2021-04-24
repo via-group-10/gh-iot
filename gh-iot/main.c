@@ -22,6 +22,9 @@
 
 #include "model/sensorModelManager.h"
 
+// Prototype for LoRaWAN handler
+void lora_handler_initialise(UBaseType_t lora_handler_task_priority);
+
 void initialiseSystem()
 {
 	// Set output ports for leds used in the example
@@ -48,8 +51,8 @@ void initialiseSystem()
     mh_z19_initialise(ser_USART3);
 	if ( HIH8120_OK == hih8120_initialise() )
 	{
+		printf("temperature/humidity sensor init!");
 	}
-
 }
 
 /*-----------------------------------------------------------*/
@@ -58,9 +61,10 @@ int main(void)
 	initialiseSystem(); // Must be done as the very first thing!!
 	printf("Program Started!!!\n");
 	sensorModelManager_create();
-	
-	while (1)
-	{
-	}
+	//MessageBufferHandle_t downLinkMessageBufferHandle = xMessageBufferCreate(2); 
+	lora_driver_initialise(ser_USART1, NULL);
+	// Create LoRaWAN task and start it up with priority 3
+	lora_handler_initialise(3);
+	vTaskStartScheduler();
 }
 

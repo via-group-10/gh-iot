@@ -28,7 +28,7 @@ void carbonDioxideController_task(void *pvParmeters)
 	mh_z19_getCo2Ppm(&appm);
 	int u = appm;
 	
-	printf("Carbon:%d\n",u);
+	//printf("Carbon:%d\n",u);
 	carbonDioxideSensor_setValue(carbon,u);
 	myTime_t time = carbonDioxideSensor_getUpdateTime(carbon);
 	}

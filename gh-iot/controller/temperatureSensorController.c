@@ -38,7 +38,7 @@ void temperatureSensorController_task(void *pvParameters)
 		int a = temperatureSensor_getValue(temSensor);
 		int b = temperatureSensor_getValue(temSensor)*10000-a*10000;
 		myTime_t time = temperatureSensor_getUpdateTime(temSensor);
-		printf("temperature:%d.%d",a,b);
+		//printf("temperature:%d.%d",a,b);
 	}
 }
 
