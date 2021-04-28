@@ -10,6 +10,8 @@
 
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
+#include <message_buffer.h>
+#include <stream_buffer.h>
 #include <semphr.h>
 #include <hih8120.h>
 
@@ -23,10 +25,13 @@
 #include "model/sensorModelManager.h"
 
 // Prototype for LoRaWAN handler
-void lora_handler_initialise(UBaseType_t lora_handler_task_priority);
+void lora_handler_initialise(MessageBufferHandle_t messageBufferHandle);
+
+static MessageBufferHandle_t downLinkMessageBufferHandle;
 
 void initialiseSystem()
 {
+	
 	// Set output ports for leds used in the example
 	// A0 for temperature sensor
 	// A1 for humidity sensor
@@ -49,10 +54,16 @@ void initialiseSystem()
 	// Make it possible to use stdio on COM port 0 (USB) on Arduino board - Setting 57600,8,N,1
 	stdio_initialise(ser_USART0);
     mh_z19_initialise(ser_USART3);
+	
 	if ( HIH8120_OK == hih8120_initialise() )
 	{
 		printf("temperature/humidity sensor init!");
 	}
+	//BufferSizeBytes can't bigger than 14? program will stuck if it is bigger than 14. Need size: 44(22*2)
+	//downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2);
+	lora_driver_initialise(ser_USART1, downLinkMessageBufferHandle);
+	//printf("===%d",sizeof(lora_driver_payload_t)*2);
+	
 }
 
 /*-----------------------------------------------------------*/
@@ -60,11 +71,12 @@ int main(void)
 {
 	initialiseSystem(); // Must be done as the very first thing!!
 	printf("Program Started!!!\n");
-	sensorModelManager_create();
-	//MessageBufferHandle_t downLinkMessageBufferHandle = xMessageBufferCreate(2); 
-	lora_driver_initialise(ser_USART1, NULL);
-	// Create LoRaWAN task and start it up with priority 3
-	lora_handler_initialise(3);
+	sensorModelManager_create();	
+	lora_handler_initialise(downLinkMessageBufferHandle);
 	vTaskStartScheduler();
+	while(1)
+	{
+		
+	}
 }
 
