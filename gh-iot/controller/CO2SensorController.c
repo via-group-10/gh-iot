@@ -5,9 +5,12 @@
 #include <mh_z19.h>
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
+#include 
 uint16_t appm;
 mh_z19_returnCode_t rc;
 carbonDioxideSensor_t carbon;
+uint16_t co2max;
+uint16_t co2min;
 void carbonDioxideController_task(void *pvParmeters)
 {
 	//mh_z19_setAutoCalibration(false);
@@ -33,7 +36,6 @@ void carbonDioxideController_task(void *pvParmeters)
 	myTime_t time = carbonDioxideSensor_getUpdateTime(carbon);
 	}
 }
-
 void CO2SensorController_create(carbonDioxideSensor_t co2)
 {
 		carbon = co2;

@@ -23,6 +23,7 @@ static lora_driver_payload_t downlinkPayload;
 static MessageBufferHandle_t downLinkBufferHandle;
 static char devEui[17]; // It is static to avoid it to occupy stack space in the task
 
+
 static void _lora_setup(void)
 {
 	lora_driver_returnCode_t rc;
@@ -146,6 +147,16 @@ void lora_handler_decodeDownlink(lora_driver_payload_t load)
 	humStatus = status-status/100*100-tempStatus;
 	CO2Status = (status-humStatus-tempStatus)/100;
 	printf("|%d_%d_%d_%d_%d_%d_%d_%d_%d|",minTemp,maxTemp,minHum,maxHum,minCO2,maxCO2,tempStatus,humStatus,CO2Status);
+	//setter for value limits
+	temperatureSensor_setmaxValue(maxTemp);
+	temperatureSensor_setminValue(minTemp);
+	temperatureSensor_setTempstatus(tempStatus);
+	carbonDioxideSensor_setMaxCo2Value(maxCO2);
+	carbonDioxideSensor_setMinCo2Value(minCO2);
+	carbonDioxideSensor_setCo2SensorStatus(CO2Status);
+	humiditySensor_setMaxValue(maxHum);
+	humiditySensor_setMinValue(minHum);
+	humiditySensor_setHumStatus(humStatus);
 }
 
 /*-----------------------------------------------------------*/

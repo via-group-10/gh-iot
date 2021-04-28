@@ -9,6 +9,9 @@ typedef struct humiditySensor{
 	float value;
 	SemaphoreHandle_t readWriteSemaphore;
 	myTime_t updateTime;
+	float maxhum;
+	float minhum;
+	int humstatus;
 } humiditySensor;
 
 humiditySensor_t humiditySensor_create(float reportInterval)
@@ -33,7 +36,27 @@ void humiditySensor_setReportInterval(humiditySensor_t self,float reportInterval
 	self->reportInterval = reportInterval;
 	xSemaphoreGive(self->readWriteSemaphore);
 }
-
+void humiditySensor_setMaxValue(humiditySensor_t self,float value)
+{
+	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	self->maxhum = value;
+	myTime_updateToNowTime(self->updateTime);
+	xSemaphoreGive(self->readWriteSemaphore);
+}
+void humiditySensor_setMinValue(humiditySensor_t self,float value)
+{
+	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	self->minhum = value;
+	myTime_updateToNowTime(self->updateTime);
+	xSemaphoreGive(self->readWriteSemaphore);
+}
+void humiditySensor_setHumStatus(humiditySensor_t self,float value)
+{
+	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	self->humstatus = value;
+	myTime_updateToNowTime(self->updateTime);
+	xSemaphoreGive(self->readWriteSemaphore);
+}
 void humiditySensor_setValue(humiditySensor_t self,float value)
 {
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
@@ -54,6 +77,27 @@ float humiditySensor_getValue(humiditySensor_t self)
 {
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
 	float result = self->value;
+	xSemaphoreGive(self->readWriteSemaphore);
+	return result;
+}
+float humiditySensor_getMaxValue(humiditySensor_t self)
+{
+	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	float result = self->maxhum;
+	xSemaphoreGive(self->readWriteSemaphore);
+	return result;
+}
+float humiditySensor_getMinValue(humiditySensor_t self)
+{
+	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	float result = self->minhum;
+	xSemaphoreGive(self->readWriteSemaphore);
+	return result;
+}
+float humiditySensor_getHumStatus(humiditySensor_t self)
+{
+	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	float result = self->humstatus;
 	xSemaphoreGive(self->readWriteSemaphore);
 	return result;
 }
