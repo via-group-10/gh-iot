@@ -34,9 +34,9 @@ void initialiseSystem()
 	
 	// Set output ports for leds used in the example
 	// A0 for temperature sensor
-	// A1 for humidity sensor
-	// A2 for carbon dioxide sensor
-	// A3 for LoRaWAN
+	// A1 for carbon dioxide sensor
+	// A2 for LoRaWAN uplink
+	// A3 for LoRaWAN downlink
 	// A4 means 7-segment Display is showing carbon dioxide
 	// A5 means 7-segment Display is showing humidity
 	// A6 means 7-segment Display is showing temperature
@@ -55,22 +55,20 @@ void initialiseSystem()
 	stdio_initialise(ser_USART0);
     mh_z19_initialise(ser_USART3);
 	
-	if ( HIH8120_OK == hih8120_initialise() )
+	if ( HIH8120_OK != hih8120_initialise() )
 	{
-		printf("temperature/humidity sensor init!");
+		printf("temperature/humidity sensor not init!");
 	}
-	//BufferSizeBytes can't bigger than 14? program will stuck if it is bigger than 14. Need size: 44(22*2)
-	//downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2);
-	lora_driver_initialise(ser_USART1, downLinkMessageBufferHandle);
-	//printf("===%d",sizeof(lora_driver_payload_t)*2);
 	
+	downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2);
+	lora_driver_initialise(ser_USART1, downLinkMessageBufferHandle);
 }
 
 /*-----------------------------------------------------------*/
 int main(void)
 {
 	initialiseSystem(); // Must be done as the very first thing!!
-	printf("Program Started!!!\n");
+	printf("Program Started!\n");
 	sensorModelManager_create();	
 	lora_handler_initialise(downLinkMessageBufferHandle);
 	vTaskStartScheduler();

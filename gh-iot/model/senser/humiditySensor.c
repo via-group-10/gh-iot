@@ -23,6 +23,7 @@ humiditySensor_t humiditySensor_create(float reportInterval)
 	}
 	newhumiditySensor->reportInterval = reportInterval;
 	newhumiditySensor->value = 0.0;
+	newhumiditySensor->humstatus = 0;
 	newhumiditySensor->updateTime = myTime_create();
 	newhumiditySensor->readWriteSemaphore = xSemaphoreCreateBinary();
 	
@@ -40,6 +41,7 @@ void humiditySensor_setMaxValue(humiditySensor_t self,float value)
 {
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
 	self->maxhum = value;
+	self->humstatus = 1;
 	myTime_updateToNowTime(self->updateTime);
 	xSemaphoreGive(self->readWriteSemaphore);
 }
@@ -47,6 +49,7 @@ void humiditySensor_setMinValue(humiditySensor_t self,float value)
 {
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
 	self->minhum = value;
+	self->humstatus = 1;
 	myTime_updateToNowTime(self->updateTime);
 	xSemaphoreGive(self->readWriteSemaphore);
 }
@@ -61,6 +64,21 @@ void humiditySensor_setValue(humiditySensor_t self,float value)
 {
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
 	self->value = value;
+	if (self->humstatus==1)
+	{
+		if (self->maxhum<self->value)
+		{
+			
+		}
+		else if (self->maxhum>=self->value&&self->minhum<=self->value)
+		{
+			
+		}
+		else
+		{
+			
+		}
+	}
 	myTime_updateToNowTime(self->updateTime);
 	xSemaphoreGive(self->readWriteSemaphore);
 }

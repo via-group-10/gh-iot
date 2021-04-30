@@ -13,48 +13,7 @@ typedef struct carbonDioxideSensor{
 	int minco2;
 	int co2status;
 } carbonDioxideSensor;
-void carbonDioxideSensor_setMaxCo2Value(carbonDioxideSensor_t self, int value)
-{
-	xSemaphoreTake(self->readWriteSemaphore,portMAX_DELAY);
-	self->maxco2 = value;
-	myTime_updateToNowTime(self->updateTime);
-	xSemaphoreGive(self->readWriteSemaphore);
-}
-void carbonDioxideSensor_setMinCo2Value(carbonDioxideSensor_t self, int value)
-{
-	xSemaphoreTake(self->readWriteSemaphore,portMAX_DELAY);
-	self->minco2 = value;
-	myTime_updateToNowTime(self->updateTime);
-	xSemaphoreGive(self->readWriteSemaphore);
-}
-void carbonDioxideSensor_setCo2SensorStatus(carbonDioxideSensor_t self, int value)
-{
-	xSemaphoreTake(self->readWriteSemaphore,portMAX_DELAY);
-	self->co2status = value;
-	myTime_updateToNowTime(self->updateTime);
-	xSemaphoreGive(self->readWriteSemaphore);
-}
-int carbonDioxideSensor_getMaxValue(carbonDioxideSensor_t self)
-{
-	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
-	int result = self->maxco2;
-	xSemaphoreGive(self->readWriteSemaphore);
-	return result;
-}
-int carbonDioxideSensor_getMinValue(carbonDioxideSensor_t self)
-{
-	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
-	int result = self->minco2;
-	xSemaphoreGive(self->readWriteSemaphore);
-	return result;
-}
-int carbonDioxideSensor_getCo2Status(carbonDioxideSensor_t self)
-{
-	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
-	int result = self->co2status;
-	xSemaphoreGive(self->readWriteSemaphore);
-	return result;
-}
+
 carbonDioxideSensor_t carbonDioxideSensor_create(float reportInterval)
 {
 	carbonDioxideSensor_t newcarbonDioxideSensor = calloc(sizeof(carbonDioxideSensor), 1);
@@ -64,6 +23,7 @@ carbonDioxideSensor_t carbonDioxideSensor_create(float reportInterval)
 	}
 	newcarbonDioxideSensor->reportInterval = reportInterval;
 	newcarbonDioxideSensor->value = 0;
+	newcarbonDioxideSensor->co2status = 0;
 	newcarbonDioxideSensor->updateTime = myTime_create();
 	newcarbonDioxideSensor->readWriteSemaphore = xSemaphoreCreateBinary();
 	
@@ -82,6 +42,21 @@ void carbonDioxideSensor_setValue(carbonDioxideSensor_t self,int value)
 {
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
 	self->value = value;
+	if (self->co2status==1)
+	{
+		if (self->maxco2<self->value)
+		{
+			
+		}
+		else if (self->maxco2>=self->value&&self->minco2<=self->value)
+		{
+			
+		}
+		else
+		{
+			
+		}
+	}
 	myTime_updateToNowTime(self->updateTime);
 	xSemaphoreGive(self->readWriteSemaphore);
 }
@@ -106,6 +81,56 @@ myTime_t carbonDioxideSensor_getUpdateTime(carbonDioxideSensor_t self)
 {
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
 	myTime_t result = self->updateTime;
+	xSemaphoreGive(self->readWriteSemaphore);
+	return result;
+}
+
+void carbonDioxideSensor_setMaxCo2Value(carbonDioxideSensor_t self, int value)
+{
+	xSemaphoreTake(self->readWriteSemaphore,portMAX_DELAY);
+	self->maxco2 = value;
+	self->co2status = 1;
+	myTime_updateToNowTime(self->updateTime);
+	xSemaphoreGive(self->readWriteSemaphore);
+}
+
+void carbonDioxideSensor_setMinCo2Value(carbonDioxideSensor_t self, int value)
+{
+	xSemaphoreTake(self->readWriteSemaphore,portMAX_DELAY);
+	self->minco2 = value;
+	self->co2status = 1;
+	myTime_updateToNowTime(self->updateTime);
+	xSemaphoreGive(self->readWriteSemaphore);
+}
+
+void carbonDioxideSensor_setCo2SensorStatus(carbonDioxideSensor_t self, int value)
+{
+	xSemaphoreTake(self->readWriteSemaphore,portMAX_DELAY);
+	self->co2status = value;
+	myTime_updateToNowTime(self->updateTime);
+	xSemaphoreGive(self->readWriteSemaphore);
+}
+
+int carbonDioxideSensor_getMaxValue(carbonDioxideSensor_t self)
+{
+	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	int result = self->maxco2;
+	xSemaphoreGive(self->readWriteSemaphore);
+	return result;
+}
+
+int carbonDioxideSensor_getMinValue(carbonDioxideSensor_t self)
+{
+	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	int result = self->minco2;
+	xSemaphoreGive(self->readWriteSemaphore);
+	return result;
+}
+
+int carbonDioxideSensor_getCo2Status(carbonDioxideSensor_t self)
+{
+	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	int result = self->co2status;
 	xSemaphoreGive(self->readWriteSemaphore);
 	return result;
 }

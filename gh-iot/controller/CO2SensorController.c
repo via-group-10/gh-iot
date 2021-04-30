@@ -5,7 +5,6 @@
 #include <mh_z19.h>
 #include <ATMEGA_FreeRTOS.h>
 #include <task.h>
-#include 
 uint16_t appm;
 mh_z19_returnCode_t rc;
 carbonDioxideSensor_t carbon;
@@ -24,10 +23,10 @@ void carbonDioxideController_task(void *pvParmeters)
 	}
 	rc = mh_z19_takeMeassuring();	
 	vTaskDelay(pdMS_TO_TICKS(carbonDioxideSensor_getReportInterval(carbon)*500));
-	PORTA ^= _BV(PA2);
+	PORTA ^= _BV(PA1);
 	vTaskDelay(pdMS_TO_TICKS(carbonDioxideSensor_getReportInterval(carbon)*500));
 	//
-	PORTA ^= _BV(PA2);
+	PORTA ^= _BV(PA1);
 	mh_z19_getCo2Ppm(&appm);
 	int u = appm;
 	
@@ -39,7 +38,7 @@ void carbonDioxideController_task(void *pvParmeters)
 void CO2SensorController_create(carbonDioxideSensor_t co2)
 {
 		carbon = co2;
-		printf("CO2 sensor started!!!\n");
+		printf("CO2 sensor started!\n");
 		xTaskCreate(carbonDioxideController_task,"COXTask",configMINIMAL_STACK_SIZE, (void*)1, tskIDLE_PRIORITY + 1, NULL);
 		//vTaskStartScheduler();
 }

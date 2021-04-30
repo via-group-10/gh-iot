@@ -176,22 +176,16 @@
     <Compile Include="controller\CO2SensorController.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="controller\HumSensorController.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="controller\HumSensorController.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="controller\sevenSegmentDisplayController.c">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="controller\sevenSegmentDisplayController.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="controller\temperatureSensorController.c">
+    <Compile Include="controller\tempHumSensorController.c">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="controller\temperatureSensorController.h">
+    <Compile Include="controller\tempHumSensorController.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="drivers\display_7seg.h">
