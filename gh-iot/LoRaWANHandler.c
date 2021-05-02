@@ -142,21 +142,22 @@ void lora_handler_decodeDownlink(lora_driver_payload_t load)
 	maxHum = (load.bytes[6] << 8) + load.bytes[7];
 	minCO2 = (load.bytes[8] << 8) + load.bytes[9];
 	maxCO2 = (load.bytes[10] << 8) + load.bytes[11];
-	status = (load.bytes[12] << 8) + load.bytes[13];
-	tempStatus = status-status/10*10;
-	humStatus = status-status/100*100-tempStatus;
-	CO2Status = (status-humStatus-tempStatus)/100;
-	printf("|%d_%d_%d_%d_%d_%d_%d_%d_%d|",minTemp,maxTemp,minHum,maxHum,minCO2,maxCO2,tempStatus,humStatus,CO2Status);
+	//status = (load.bytes[12] << 8) + load.bytes[13];
+	//tempStatus = status-status/10*10;
+	//humStatus = status-status/100*100-tempStatus;
+	//CO2Status = (status-humStatus-tempStatus)/100;
+	printf("|%d_%d_%d_%d_%d_%d|",minTemp,maxTemp,minHum,maxHum,minCO2,maxCO2);
+	//printf("|%d_%d_%d_%d_%d_%d_%d_%d_%d|",minTemp,maxTemp,minHum,maxHum,minCO2,maxCO2,tempStatus,humStatus,CO2Status);
 	//setter for value limits
-	temperatureSensor_setmaxValue(maxTemp);
-	temperatureSensor_setminValue(minTemp);
-	temperatureSensor_setTempstatus(tempStatus);
-	carbonDioxideSensor_setMaxCo2Value(maxCO2);
-	carbonDioxideSensor_setMinCo2Value(minCO2);
-	carbonDioxideSensor_setCo2SensorStatus(CO2Status);
-	humiditySensor_setMaxValue(maxHum);
-	humiditySensor_setMinValue(minHum);
-	humiditySensor_setHumStatus(humStatus);
+	temperatureSensor_setmaxValue(sensorModelManager_getTemperatureSensor(),maxTemp);
+	temperatureSensor_setminValue(sensorModelManager_getTemperatureSensor(),minTemp);
+	//temperatureSensor_setTempstatus(sensorModelManager_getTemperatureSensor(),tempStatus);
+	carbonDioxideSensor_setMaxCo2Value(sensorModelManager_getCarbonDioxideSensor(),maxCO2);
+	carbonDioxideSensor_setMinCo2Value(sensorModelManager_getCarbonDioxideSensor(),minCO2);
+	//carbonDioxideSensor_setCo2SensorStatus(sensorModelManager_getCarbonDioxideSensor(),CO2Status);
+	humiditySensor_setMaxValue(sensorModelManager_getHumiditySensor(),maxHum);
+	humiditySensor_setMinValue(sensorModelManager_getHumiditySensor(),minHum);
+	//humiditySensor_setHumStatus(sensorModelManager_getHumiditySensor(),humStatus);
 }
 
 /*-----------------------------------------------------------*/
@@ -178,7 +179,6 @@ void lora_handler_task( void *pvParameters )
 	
 	for(;;)
 	{
-		
 		int16_t temp = temperatureSensor_getValue(sensorModelManager_getTemperatureSensor());
 		int16_t hum = humiditySensor_getValue(sensorModelManager_getHumiditySensor());
 		int16_t co2_ppm = carbonDioxideSensor_getValue(sensorModelManager_getCarbonDioxideSensor());
@@ -191,36 +191,17 @@ void lora_handler_task( void *pvParameters )
 		_uplink_payload.bytes[5] = co2_ppm & 0xFF;
 
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
-		PORTA ^= _BV(PA3);
+		PORTA ^= _BV(PA2);
 		char *result = lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload));
 		printf("Upload Message >%s<\n", result);
 		if (result=="MAC_RX"||result=="OK")
 		{
 			downlinkPayload.portNo = 1;
 			downlinkPayload.len = 14;
-			xMessageBufferReceive(downLinkBufferHandle, &downlinkPayload, sizeof(lora_driver_payload_t), portMAX_DELAY);
 			PORTA ^= _BV(PA3);
+			xMessageBufferReceive(downLinkBufferHandle, &downlinkPayload, sizeof(lora_driver_payload_t), portMAX_DELAY);
 			printf("DOWN LINK: from port: %d with %d bytes received!", downlinkPayload.portNo, downlinkPayload.len); // Just for Debug
 			lora_handler_decodeDownlink(downlinkPayload);
-			//example:0002000a00030014006403840065
-			lora_driver_payload_t testPayload;
-			testPayload.portNo = 1;
-			testPayload.len = 14;
-			testPayload.bytes[0] = 2 >> 8;
-			testPayload.bytes[1] = 2 & 0xFF;
-			testPayload.bytes[2] = 10 >> 8;
-			testPayload.bytes[3] = 10 & 0xFF;
-			testPayload.bytes[4] = 3 >> 8;
-			testPayload.bytes[5] = 3 & 0xFF;
-			testPayload.bytes[6] = 20 >> 8;
-			testPayload.bytes[7] = 20 & 0xFF;
-			testPayload.bytes[8] = 100 >> 8;
-			testPayload.bytes[9] = 100 & 0xFF;
-			testPayload.bytes[10] = 900 >> 8;
-			testPayload.bytes[11] = 900 & 0xFF;
-			testPayload.bytes[12] = 101 >> 8;
-			testPayload.bytes[13] = 101 & 0xFF;
-			//lora_handler_decodeDownlink(testPayload);
 		}
 		else if (result!="MAC_TX_OK"&&result!="OK")
 		{
@@ -233,7 +214,7 @@ void lora_handler_task( void *pvParameters )
 			printf("Rejoin Network TriesLeft:>%s<\n", lora_driver_mapReturnCodeToText(lora_driver_join(LORA_OTAA)));
 			printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
 		}
-		PORTA ^= _BV(PA3);
+		PORTA ^= _BV(PA2);
 		lora_handler_decodeUplink(_uplink_payload);
 		//wait 1 min
 		vTaskDelay(pdMS_TO_TICKS(6000));
@@ -245,6 +226,5 @@ void lora_handler_initialise(MessageBufferHandle_t messageBufferHandle)
 {
 	downLinkBufferHandle = messageBufferHandle;
 	xTaskCreate(lora_handler_task,"LRHand",configMINIMAL_STACK_SIZE,(void*)1,tskIDLE_PRIORITY + 2,NULL);
-	//xTaskCreate(lora_handler_downlinkTask,"LRDownlink",configMINIMAL_STACK_SIZE,(void*)1,tskIDLE_PRIORITY + 2,NULL);
 }
 

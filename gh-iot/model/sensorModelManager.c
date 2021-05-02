@@ -1,5 +1,5 @@
 #include "../controller/sevenSegmentDisplayController.h"
-#include "../controller/temperatureSensorController.h"
+#include "../controller/tempHumSensorController.h"
 #include "../controller/CO2SensorController.h"
 #include "senser/temperatureSensor.h"
 #include "senser/humiditySensor.h"
@@ -15,13 +15,10 @@ void sensorModelManager_create()
 {
 	sevenSegmentDisplayController_create(0.5);
 	
-	//create temperature sensor controller
+	//create temperature/humidity sensor controller
 	temperatureSensor = temperatureSensor_create(1);
-	temperatureSensorController_create(temperatureSensor);
-	
-	//create humidity sensor controller
 	humiditySensor = humiditySensor_create(1);
-	HumSensorController_create(humiditySensor);
+	tempHumSensorController_create(temperatureSensor,humiditySensor);
 	
 	//create carbon dioxide sensor controller
 	carbonDioxideSensor = carbonDioxideSensor_create(1);

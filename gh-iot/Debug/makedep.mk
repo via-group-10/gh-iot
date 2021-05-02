@@ -4,11 +4,9 @@
 
 controller\CO2SensorController.c
 
-controller\HumSensorController.c
-
 controller\sevenSegmentDisplayController.c
 
-controller\temperatureSensorController.c
+controller\tempHumSensorController.c
 
 model\senser\carbonDioxideSensor.c
 

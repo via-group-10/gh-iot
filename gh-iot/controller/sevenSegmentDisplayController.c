@@ -53,6 +53,6 @@ void sevenSegmentDisplayController_create(float displayUpdateTime)
 	display_7seg_initialise(NULL);
 	display_7seg_powerUp();
 	
-	printf("7-segment Display started!!!\n");
+	printf("7-segment Display started!\n");
 	xTaskCreate(sevenSegmentDisplayController_task, "7-segment Display Task", configMINIMAL_STACK_SIZE, (void*)1, tskIDLE_PRIORITY + 1, NULL);
 }
