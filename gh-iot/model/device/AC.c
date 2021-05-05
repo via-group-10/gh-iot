@@ -1,7 +1,20 @@
+#include "AC.h"
+#include <stdio.h>
 
-/*
- * AC.c
- *
- * Created: 2021/5/5 15:08:47
- *  Author: XHYX0
- */ 
+bool turnOn = false;
+void AC_turnOn()
+{
+	if (!turnOn)
+	{
+		turnOn = true;
+		printf("AC £ºTurn on");
+	}
+}
+void AC_turnOff()
+{
+	if (turnOn)
+	{
+		turnOn = false;
+		printf("AC : Turn off");
+	}
+}

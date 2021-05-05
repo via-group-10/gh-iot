@@ -1,3 +1,4 @@
 #pragma once
 
-void 
+void HumilityGenerator_turnOn();
+void HumilityGenerator_turnOff();
