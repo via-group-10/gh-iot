@@ -1,20 +1,21 @@
 #include "HumilityGenerator.h"
 #include <stdio.h>
+#include <stdbool.h>
 
-bool turnOn = false;
+bool hum_turnOn = false;
 void HumilityGenerator_turnOn()
 {
-	if (!turnOn)
+	if (!hum_turnOn)
 	{
-		turnOn = true;
+		hum_turnOn = true;
 		printf("humidifier £ºTurn on");
 	}
 }
 void HumilityGenerator_turnOff()
 {
-	if (turnOn)
+	if (hum_turnOn)
 	{
-		turnOn = false;
+		hum_turnOn = false;
 		printf("humidifier : Turn off");
 	}
 }

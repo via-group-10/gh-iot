@@ -1,22 +1,23 @@
 #include "carbonDioxideGenerator.h"
 #include <stdio.h>
+#include <stdbool.h>
 
-bool turnOn = false;
+bool co2_turnOn = false;
 
 void carbonDioxideGenerator_turnOn()
 {
-	if (!turnOn)
+	if (!co2_turnOn)
 	{
-		turnOn = true;
+		co2_turnOn = true;
 		printf("Carbon Dioxide Generator: Turn on");
 	}
 }
 
 void carbonDioxideGenerator_turnOff()
 {
-	if (turnOn)
+	if (co2_turnOn)
 	{
-		turnOn = false;
+		co2_turnOn = false;
 		printf("Carbon Dioxide Generator: Turn off");
 	}
 }

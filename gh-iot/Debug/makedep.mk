@@ -8,6 +8,12 @@ controller\sevenSegmentDisplayController.c
 
 controller\tempHumSensorController.c
 
+model\device\AC.c
+
+model\device\carbonDioxideGenerator.c
+
+model\device\HumilityGenerator.c
+
 model\senser\carbonDioxideSensor.c
 
 model\senser\humiditySensor.c

@@ -120,7 +120,7 @@ void lora_handler_decodeUplink(lora_driver_payload_t load)
 	temp = (load.bytes[0] << 8) + load.bytes[1];
     hum = (load.bytes[2] << 8) + load.bytes[3];
 	carbon = (load.bytes[4] << 8) + load.bytes[5];
-	printf("|%d_%d_%d|",temp,hum,carbon);
+	printf("Uplink:|%d_%d_%d|",temp,hum,carbon);
 }
 
 void lora_handler_decodeDownlink(lora_driver_payload_t load)
@@ -146,7 +146,7 @@ void lora_handler_decodeDownlink(lora_driver_payload_t load)
 	//tempStatus = status-status/10*10;
 	//humStatus = status-status/100*100-tempStatus;
 	//CO2Status = (status-humStatus-tempStatus)/100;
-	printf("|%d_%d_%d_%d_%d_%d|",minTemp,maxTemp,minHum,maxHum,minCO2,maxCO2);
+	printf("Downlink:|%d_%d_%d_%d_%d_%d|",minTemp,maxTemp,minHum,maxHum,minCO2,maxCO2);
 	//printf("|%d_%d_%d_%d_%d_%d_%d_%d_%d|",minTemp,maxTemp,minHum,maxHum,minCO2,maxCO2,tempStatus,humStatus,CO2Status);
 	//setter for value limits
 	temperatureSensor_setmaxValue(sensorModelManager_getTemperatureSensor(),maxTemp);
@@ -193,7 +193,8 @@ void lora_handler_task( void *pvParameters )
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		PORTA ^= _BV(PA2);
 		char *result = lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload));
-		printf("Upload Message >%s<\n", result);
+		lora_handler_decodeUplink(_uplink_payload);
+		//printf("Upload Message >%s<\n", result);
 		if (result=="MAC_RX"||result=="OK")
 		{
 			downlinkPayload.portNo = 1;
@@ -212,10 +213,9 @@ void lora_handler_task( void *pvParameters )
 			// Give it a chance to wakeup
 			vTaskDelay(150);
 			printf("Rejoin Network TriesLeft:>%s<\n", lora_driver_mapReturnCodeToText(lora_driver_join(LORA_OTAA)));
-			printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
+			//printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
 		}
 		PORTA ^= _BV(PA2);
-		lora_handler_decodeUplink(_uplink_payload);
 		//wait 1 min
 		vTaskDelay(pdMS_TO_TICKS(6000));
 		//lora_handler_downlink();

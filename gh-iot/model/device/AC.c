@@ -1,20 +1,35 @@
 #include "AC.h"
 #include <stdio.h>
+#include <stdbool.h>
 
-bool turnOn = false;
-void AC_turnOn()
+static bool ac_turnOn = false;
+static int ac_turnOnStatue;
+
+void AC_turnOnHeating()
 {
-	if (!turnOn)
+	if (!ac_turnOn||ac_turnOnStatue!=1)
 	{
-		turnOn = true;
-		printf("AC £ºTurn on");
+		ac_turnOn = true;
+		ac_turnOnStatue = 1;
+		printf("AC £ºTurn on heating");
 	}
 }
+
+void AC_turnOnCooling()
+{
+	if (!ac_turnOn||ac_turnOnStatue!=0)
+	{
+		ac_turnOn = true;
+		ac_turnOnStatue = 0;
+		printf("AC £ºTurn on Cooling");
+	}
+}
+
 void AC_turnOff()
 {
-	if (turnOn)
+	if (ac_turnOn)
 	{
-		turnOn = false;
+		ac_turnOn = false;
 		printf("AC : Turn off");
 	}
 }
