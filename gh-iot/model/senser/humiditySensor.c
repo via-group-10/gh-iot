@@ -68,7 +68,7 @@ void humiditySensor_setValue(humiditySensor_t self,float value)
 	{
 		if (self->maxhum<self->value)
 		{
-			
+			HumilityGenerator_turnOff();
 		}
 		else if (self->maxhum>=self->value&&self->minhum<=self->value)
 		{
@@ -76,7 +76,7 @@ void humiditySensor_setValue(humiditySensor_t self,float value)
 		}
 		else
 		{
-			
+			HumilityGenerator_turnOn();
 		}
 	}
 	myTime_updateToNowTime(self->updateTime);

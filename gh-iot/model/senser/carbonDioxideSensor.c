@@ -1,5 +1,6 @@
 #include "carbonDioxideSensor.h"
 #include "../time/myTime.h"
+#include "../device/carbonDioxideGenerator.h"
 #include <stdlib.h>
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
@@ -46,7 +47,7 @@ void carbonDioxideSensor_setValue(carbonDioxideSensor_t self,int value)
 	{
 		if (self->maxco2<self->value)
 		{
-			
+			carbonDioxideGenerator_turnOff();
 		}
 		else if (self->maxco2>=self->value&&self->minco2<=self->value)
 		{
@@ -54,7 +55,7 @@ void carbonDioxideSensor_setValue(carbonDioxideSensor_t self,int value)
 		}
 		else
 		{
-			
+			carbonDioxideGenerator_turnOn();
 		}
 	}
 	myTime_updateToNowTime(self->updateTime);

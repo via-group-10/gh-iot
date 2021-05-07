@@ -236,6 +236,24 @@
     <Compile Include="drivers\twi.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="model\device\AC.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\device\AC.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\device\carbonDioxideGenerator.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\device\carbonDioxideGenerator.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\device\HumilityGenerator.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\device\HumilityGenerator.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="model\senser\carbonDioxideSensor.c">
       <SubType>compile</SubType>
     </Compile>
@@ -369,6 +387,8 @@
     <Folder Include="FreeRTOS\FreeRTOSTraceDriver\" />
     <Folder Include="FreeRTOS\src\" />
     <Folder Include="model" />
+    <Folder Include="model\device\" />
+    <Folder Include="model\device\" />
     <Folder Include="model\time" />
     <Folder Include="model\senser" />
   </ItemGroup>

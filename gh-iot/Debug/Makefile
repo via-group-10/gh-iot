@@ -41,6 +41,8 @@ SUBDIRS :=  \
 ../FreeRTOS/FreeRTOSTraceDriver/ \
 ../FreeRTOS/src/ \
 ../model \
+../model/device/ \
+../model/device/ \
 ../model/time \
 ../model/senser
 
@@ -50,6 +52,9 @@ C_SRCS +=  \
 ../controller/CO2SensorController.c \
 ../controller/sevenSegmentDisplayController.c \
 ../controller/tempHumSensorController.c \
+../model/device/AC.c \
+../model/device/carbonDioxideGenerator.c \
+../model/device/HumilityGenerator.c \
 ../model/senser/carbonDioxideSensor.c \
 ../model/senser/humiditySensor.c \
 ../model/senser/temperatureSensor.c \
@@ -80,6 +85,9 @@ OBJS +=  \
 controller/CO2SensorController.o \
 controller/sevenSegmentDisplayController.o \
 controller/tempHumSensorController.o \
+model/device/AC.o \
+model/device/carbonDioxideGenerator.o \
+model/device/HumilityGenerator.o \
 model/senser/carbonDioxideSensor.o \
 model/senser/humiditySensor.o \
 model/senser/temperatureSensor.o \
@@ -103,6 +111,9 @@ OBJS_AS_ARGS +=  \
 controller/CO2SensorController.o \
 controller/sevenSegmentDisplayController.o \
 controller/tempHumSensorController.o \
+model/device/AC.o \
+model/device/carbonDioxideGenerator.o \
+model/device/HumilityGenerator.o \
 model/senser/carbonDioxideSensor.o \
 model/senser/humiditySensor.o \
 model/senser/temperatureSensor.o \
@@ -126,6 +137,9 @@ C_DEPS +=  \
 controller/CO2SensorController.d \
 controller/sevenSegmentDisplayController.d \
 controller/tempHumSensorController.d \
+model/device/AC.d \
+model/device/carbonDioxideGenerator.d \
+model/device/HumilityGenerator.d \
 model/senser/carbonDioxideSensor.d \
 model/senser/humiditySensor.d \
 model/senser/temperatureSensor.d \
@@ -149,6 +163,9 @@ C_DEPS_AS_ARGS +=  \
 controller/CO2SensorController.d \
 controller/sevenSegmentDisplayController.d \
 controller/tempHumSensorController.d \
+model/device/AC.d \
+model/device/carbonDioxideGenerator.d \
+model/device/HumilityGenerator.d \
 model/senser/carbonDioxideSensor.d \
 model/senser/humiditySensor.d \
 model/senser/temperatureSensor.d \
@@ -197,6 +214,27 @@ controller/sevenSegmentDisplayController.o: ../controller/sevenSegmentDisplayCon
 	
 
 controller/tempHumSensorController.o: ../controller/tempHumSensorController.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../drivers" -I"../FreeRTOS/src"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+model/device/AC.o: ../model/device/AC.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../drivers" -I"../FreeRTOS/src"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+model/device/carbonDioxideGenerator.o: ../model/device/carbonDioxideGenerator.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)D:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../drivers" -I"../FreeRTOS/src"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+model/device/HumilityGenerator.o: ../model/device/HumilityGenerator.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)D:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG -DF_CPU=16000000L  -I"D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\include" -I"../drivers" -I"../FreeRTOS/src"  -O1 -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -mrelax -g2 -Wall -mmcu=atmega2560 -B "D:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.3.300\gcc\dev\atmega2560" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
