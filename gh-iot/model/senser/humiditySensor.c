@@ -1,5 +1,6 @@
 #include "humiditySensor.h"
 #include "../time/myTime.h"
+#include "../device/HumilityGenerator.h"
 #include <stdlib.h>
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>

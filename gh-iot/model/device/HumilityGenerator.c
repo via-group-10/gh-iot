@@ -19,3 +19,15 @@ void HumilityGenerator_turnOff()
 		printf("humidifier : Turn off");
 	}
 }
+
+int HumilityGenerator_getStateCode()
+{
+	if (hum_turnOn)
+	{
+		return 0;
+	}
+	else
+	{
+		return -1;
+	}
+}

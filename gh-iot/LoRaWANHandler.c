@@ -2,6 +2,9 @@
 #include "model/senser/temperatureSensor.h"
 #include "model/senser/humiditySensor.h"
 #include "model/senser/carbonDioxideSensor.h"
+#include "model/device/AC.h"
+#include "model/device/HumilityGenerator.h"
+#include "model/device/carbonDioxideGenerator.h"
 #include <stddef.h>
 #include <stdio.h>
 
@@ -174,7 +177,7 @@ void lora_handler_task( void *pvParameters )
 
 	_lora_setup();
 
-	_uplink_payload.len = 6;
+	_uplink_payload.len = 12;
 	_uplink_payload.portNo = 2;
 	
 	for(;;)
@@ -183,12 +186,24 @@ void lora_handler_task( void *pvParameters )
 		int16_t hum = humiditySensor_getValue(sensorModelManager_getHumiditySensor());
 		int16_t co2_ppm = carbonDioxideSensor_getValue(sensorModelManager_getCarbonDioxideSensor());
 		
+		int16_t acState = AC_getStateCode();
+		int16_t humGenState = HumilityGenerator_getStateCode();
+		int16_t co2GenState = carbonDioxideGenerator_getStateCode();
+		
 		_uplink_payload.bytes[0] = temp >> 8;
 		_uplink_payload.bytes[1] = temp & 0xFF;
 		_uplink_payload.bytes[2] = hum >> 8;
 		_uplink_payload.bytes[3] = hum & 0xFF;
 		_uplink_payload.bytes[4] = co2_ppm >> 8;
 		_uplink_payload.bytes[5] = co2_ppm & 0xFF;
+		
+		_uplink_payload.bytes[6] = acState >> 8;//-1: turn off,0: turn on:cooling,1: turn on:heating
+		_uplink_payload.bytes[7] = acState & 0xFF;
+		_uplink_payload.bytes[8] = humGenState >> 8;//-1: turn off,0: turn on
+		_uplink_payload.bytes[9] = humGenState & 0xFF;
+		_uplink_payload.bytes[10] = co2GenState >> 8;//-1: turn off,0: turn on
+		_uplink_payload.bytes[11] = co2GenState & 0xFF;
+		
 
 		status_leds_shortPuls(led_ST4);  // OPTIONAL
 		PORTA ^= _BV(PA2);
@@ -198,7 +213,7 @@ void lora_handler_task( void *pvParameters )
 		if (result=="MAC_RX"||result=="OK")
 		{
 			downlinkPayload.portNo = 1;
-			downlinkPayload.len = 14;
+			downlinkPayload.len = 12;
 			PORTA ^= _BV(PA3);
 			xMessageBufferReceive(downLinkBufferHandle, &downlinkPayload, sizeof(lora_driver_payload_t), portMAX_DELAY);
 			printf("DOWN LINK: from port: %d with %d bytes received!", downlinkPayload.portNo, downlinkPayload.len); // Just for Debug

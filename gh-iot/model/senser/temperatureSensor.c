@@ -1,5 +1,6 @@
 #include "temperatureSensor.h"
 #include "../time/myTime.h"
+#include "../device/AC.h"
 #include <stdlib.h>
 #include <ATMEGA_FreeRTOS.h>
 #include <semphr.h>
