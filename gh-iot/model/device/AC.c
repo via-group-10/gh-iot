@@ -21,7 +21,7 @@ void AC_turnOnCooling()
 	{
 		ac_turnOn = true;
 		ac_turnOnStatue = 0;
-		printf("AC £ºTurn on Cooling");
+		printf("AC £ºTurn on cooling");
 	}
 }
 
@@ -31,5 +31,17 @@ void AC_turnOff()
 	{
 		ac_turnOn = false;
 		printf("AC : Turn off");
+	}
+}
+
+int AC_getStateCode()
+{
+	if (ac_turnOn)
+	{
+		return ac_turnOnStatue;
+	}
+	else
+	{
+		return -1;
 	}
 }

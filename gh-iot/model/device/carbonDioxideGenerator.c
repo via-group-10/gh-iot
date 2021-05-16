@@ -21,3 +21,15 @@ void carbonDioxideGenerator_turnOff()
 		printf("Carbon Dioxide Generator: Turn off");
 	}
 }
+
+int carbonDioxideGenerator_getStateCode()
+{
+	if (co2_turnOn)
+	{
+		return 0;
+	}
+	else
+	{
+		return -1;
+	}
+}
