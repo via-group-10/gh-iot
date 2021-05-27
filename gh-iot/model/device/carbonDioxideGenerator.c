@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-bool co2_turnOn = false;
+static bool co2_turnOn = false;
 
 void carbonDioxideGenerator_turnOn()
 {

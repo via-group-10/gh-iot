@@ -8,7 +8,7 @@
 typedef struct carbonDioxideSensor{
 	float reportInterval;
 	int value;
-	SemaphoreHandle_t readWriteSemaphore;
+	SemaphoreHandle_t readWriteMutex;
 	myTime_t updateTime;
 	int maxco2;
 	int minco2;
@@ -26,22 +26,22 @@ carbonDioxideSensor_t carbonDioxideSensor_create(float reportInterval)
 	newcarbonDioxideSensor->value = 0;
 	newcarbonDioxideSensor->co2status = 0;
 	newcarbonDioxideSensor->updateTime = myTime_create();
-	newcarbonDioxideSensor->readWriteSemaphore = xSemaphoreCreateBinary();
+	newcarbonDioxideSensor->readWriteMutex = xSemaphoreCreateMutex();
 	
-	xSemaphoreGive(newcarbonDioxideSensor->readWriteSemaphore);
+	xSemaphoreGive(newcarbonDioxideSensor->readWriteMutex);
 	return newcarbonDioxideSensor;
 }
 
 void carbonDioxideSensor_setReportInterval(carbonDioxideSensor_t self,float reportInterval)
 {
-	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	xSemaphoreTake(self->readWriteMutex, portMAX_DELAY);
 	self->reportInterval = reportInterval;
-	xSemaphoreGive(self->readWriteSemaphore);
+	xSemaphoreGive(self->readWriteMutex);
 }
 
 void carbonDioxideSensor_setValue(carbonDioxideSensor_t self,int value)
 {
-	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	xSemaphoreTake(self->readWriteMutex, portMAX_DELAY);
 	self->value = value;
 	if (self->co2status==1)
 	{
@@ -59,79 +59,79 @@ void carbonDioxideSensor_setValue(carbonDioxideSensor_t self,int value)
 		}
 	}
 	myTime_updateToNowTime(self->updateTime);
-	xSemaphoreGive(self->readWriteSemaphore);
+	xSemaphoreGive(self->readWriteMutex);
 }
 
 float carbonDioxideSensor_getReportInterval(carbonDioxideSensor_t self)
 {
-	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	xSemaphoreTake(self->readWriteMutex, portMAX_DELAY);
 	float result = self->reportInterval;
-	xSemaphoreGive(self->readWriteSemaphore);
+	xSemaphoreGive(self->readWriteMutex);
 	return result;
 }
 
 int carbonDioxideSensor_getValue(carbonDioxideSensor_t self)
 {
-	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	xSemaphoreTake(self->readWriteMutex, portMAX_DELAY);
 	int result = self->value;
-	xSemaphoreGive(self->readWriteSemaphore);
+	xSemaphoreGive(self->readWriteMutex);
 	return result;
 }
 
 myTime_t carbonDioxideSensor_getUpdateTime(carbonDioxideSensor_t self)
 {
-	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	xSemaphoreTake(self->readWriteMutex, portMAX_DELAY);
 	myTime_t result = self->updateTime;
-	xSemaphoreGive(self->readWriteSemaphore);
+	xSemaphoreGive(self->readWriteMutex);
 	return result;
 }
 
 void carbonDioxideSensor_setMaxCo2Value(carbonDioxideSensor_t self, int value)
 {
-	xSemaphoreTake(self->readWriteSemaphore,portMAX_DELAY);
+	xSemaphoreTake(self->readWriteMutex,portMAX_DELAY);
 	self->maxco2 = value;
 	self->co2status = 1;
 	myTime_updateToNowTime(self->updateTime);
-	xSemaphoreGive(self->readWriteSemaphore);
+	xSemaphoreGive(self->readWriteMutex);
 }
 
 void carbonDioxideSensor_setMinCo2Value(carbonDioxideSensor_t self, int value)
 {
-	xSemaphoreTake(self->readWriteSemaphore,portMAX_DELAY);
+	xSemaphoreTake(self->readWriteMutex,portMAX_DELAY);
 	self->minco2 = value;
 	self->co2status = 1;
 	myTime_updateToNowTime(self->updateTime);
-	xSemaphoreGive(self->readWriteSemaphore);
+	xSemaphoreGive(self->readWriteMutex);
 }
 
 void carbonDioxideSensor_setCo2SensorStatus(carbonDioxideSensor_t self, int value)
 {
-	xSemaphoreTake(self->readWriteSemaphore,portMAX_DELAY);
+	xSemaphoreTake(self->readWriteMutex,portMAX_DELAY);
 	self->co2status = value;
 	myTime_updateToNowTime(self->updateTime);
-	xSemaphoreGive(self->readWriteSemaphore);
+	xSemaphoreGive(self->readWriteMutex);
 }
 
 int carbonDioxideSensor_getMaxValue(carbonDioxideSensor_t self)
 {
-	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	xSemaphoreTake(self->readWriteMutex, portMAX_DELAY);
 	int result = self->maxco2;
-	xSemaphoreGive(self->readWriteSemaphore);
+	xSemaphoreGive(self->readWriteMutex);
 	return result;
 }
 
 int carbonDioxideSensor_getMinValue(carbonDioxideSensor_t self)
 {
-	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	xSemaphoreTake(self->readWriteMutex, portMAX_DELAY);
 	int result = self->minco2;
-	xSemaphoreGive(self->readWriteSemaphore);
+	xSemaphoreGive(self->readWriteMutex);
 	return result;
 }
 
 int carbonDioxideSensor_getCo2Status(carbonDioxideSensor_t self)
 {
-	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	xSemaphoreTake(self->readWriteMutex, portMAX_DELAY);
 	int result = self->co2status;
-	xSemaphoreGive(self->readWriteSemaphore);
+	xSemaphoreGive(self->readWriteMutex);
 	return result;
 }

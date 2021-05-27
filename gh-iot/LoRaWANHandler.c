@@ -2,13 +2,14 @@
 #include "model/senser/temperatureSensor.h"
 #include "model/senser/humiditySensor.h"
 #include "model/senser/carbonDioxideSensor.h"
-#include "model/device/AC.h"
-#include "model/device/HumilityGenerator.h"
-#include "model/device/carbonDioxideGenerator.h"
+#include "../model/device/AC.h"
+#include "../model/device/HumilityGenerator.h"
+#include "../model/device/carbonDioxideGenerator.h"
 #include <stddef.h>
 #include <stdio.h>
 
 #include <ATMEGA_FreeRTOS.h>
+#include <queue.h>
 
 #include <lora_driver.h>
 #include <status_leds.h>
@@ -24,7 +25,9 @@ void lora_handler_task( void *pvParameters );
 static lora_driver_payload_t _uplink_payload;
 static lora_driver_payload_t downlinkPayload;
 static MessageBufferHandle_t downLinkBufferHandle;
-static char devEui[17]; // It is static to avoid it to occupy stack space in the task
+
+static QueueHandle_t queue;
+//static char devEui[17]; // It is static to avoid it to occupy stack space in the task
 
 
 static void _lora_setup(void)
@@ -127,17 +130,13 @@ void lora_handler_decodeUplink(lora_driver_payload_t load)
 }
 
 void lora_handler_decodeDownlink(lora_driver_payload_t load)
-{
+{	
 	int16_t minTemp;
 	int16_t maxTemp;
 	int16_t minHum;
 	int16_t maxHum;
 	int16_t minCO2;
 	int16_t maxCO2;
-	int16_t status;
-	int16_t tempStatus; //off=0,on=1
-	int16_t humStatus; //off=0,on=1
-	int16_t CO2Status; //off=0,on=1
 	
 	minTemp = (load.bytes[0] << 8) + load.bytes[1];
 	maxTemp = (load.bytes[2] << 8) + load.bytes[3];
@@ -145,22 +144,14 @@ void lora_handler_decodeDownlink(lora_driver_payload_t load)
 	maxHum = (load.bytes[6] << 8) + load.bytes[7];
 	minCO2 = (load.bytes[8] << 8) + load.bytes[9];
 	maxCO2 = (load.bytes[10] << 8) + load.bytes[11];
-	//status = (load.bytes[12] << 8) + load.bytes[13];
-	//tempStatus = status-status/10*10;
-	//humStatus = status-status/100*100-tempStatus;
-	//CO2Status = (status-humStatus-tempStatus)/100;
 	printf("Downlink:|%d_%d_%d_%d_%d_%d|",minTemp,maxTemp,minHum,maxHum,minCO2,maxCO2);
-	//printf("|%d_%d_%d_%d_%d_%d_%d_%d_%d|",minTemp,maxTemp,minHum,maxHum,minCO2,maxCO2,tempStatus,humStatus,CO2Status);
 	//setter for value limits
 	temperatureSensor_setmaxValue(sensorModelManager_getTemperatureSensor(),maxTemp);
 	temperatureSensor_setminValue(sensorModelManager_getTemperatureSensor(),minTemp);
-	//temperatureSensor_setTempstatus(sensorModelManager_getTemperatureSensor(),tempStatus);
 	carbonDioxideSensor_setMaxCo2Value(sensorModelManager_getCarbonDioxideSensor(),maxCO2);
 	carbonDioxideSensor_setMinCo2Value(sensorModelManager_getCarbonDioxideSensor(),minCO2);
-	//carbonDioxideSensor_setCo2SensorStatus(sensorModelManager_getCarbonDioxideSensor(),CO2Status);
 	humiditySensor_setMaxValue(sensorModelManager_getHumiditySensor(),maxHum);
 	humiditySensor_setMinValue(sensorModelManager_getHumiditySensor(),minHum);
-	//humiditySensor_setHumStatus(sensorModelManager_getHumiditySensor(),humStatus);
 }
 
 /*-----------------------------------------------------------*/
@@ -217,7 +208,8 @@ void lora_handler_task( void *pvParameters )
 			PORTA ^= _BV(PA3);
 			xMessageBufferReceive(downLinkBufferHandle, &downlinkPayload, sizeof(lora_driver_payload_t), portMAX_DELAY);
 			printf("DOWN LINK: from port: %d with %d bytes received!", downlinkPayload.portNo, downlinkPayload.len); // Just for Debug
-			lora_handler_decodeDownlink(downlinkPayload);
+			xQueueSendToBack(queue,&downlinkPayload,0);
+			//lora_handler_decodeDownlink(downlinkPayload);
 		}
 		else if (result!="MAC_TX_OK"&&result!="OK")
 		{
@@ -237,9 +229,21 @@ void lora_handler_task( void *pvParameters )
 	}
 }
 
+void lora_handler_downlinkTask( void *pvParameters )
+{
+	while(true)
+	{
+		lora_driver_payload_t downlinkPayloadInQueue;
+		xQueueReceive(queue,&downlinkPayloadInQueue,portMAX_DELAY);
+		lora_handler_decodeDownlink(downlinkPayloadInQueue);
+	}
+}
+
 void lora_handler_initialise(MessageBufferHandle_t messageBufferHandle)
 {
 	downLinkBufferHandle = messageBufferHandle;
+	queue = xQueueCreate(2,sizeof(lora_driver_payload_t));
 	xTaskCreate(lora_handler_task,"LRHand",configMINIMAL_STACK_SIZE,(void*)1,tskIDLE_PRIORITY + 2,NULL);
+	xTaskCreate(lora_handler_downlinkTask,"ULHand",configMINIMAL_STACK_SIZE,(void*)1,tskIDLE_PRIORITY + 2,NULL);
 }
 

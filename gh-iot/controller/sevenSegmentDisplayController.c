@@ -9,7 +9,7 @@
 #include <display_7seg.h>
 #include <stdio.h>
 
-float updateTime;
+float updateTime = 0.5;
 
 void sevenSegmentDisplayController_task(void *pvParameters)
 {
@@ -30,6 +30,8 @@ void sevenSegmentDisplayController_task(void *pvParameters)
 		vTaskDelay(pdMS_TO_TICKS(updateTime*1000));
 		PORTA ^= _BV(PA6);
 		
+		myTime_addOneSec();
+		
 		//Show humidity on 7-segment Display
 		PORTA ^= _BV(PA5);
 		humiditySensor_t humiditySensor = sensorModelManager_getHumiditySensor();
@@ -43,12 +45,13 @@ void sevenSegmentDisplayController_task(void *pvParameters)
 		display_7seg_display(carbonDioxideSensor_getValue(carbonDioxideSensor),0);
 		vTaskDelay(pdMS_TO_TICKS(updateTime*1000));
 		PORTA ^= _BV(PA4);
+		
+		myTime_addOneSec();
 	}
 }
 
-void sevenSegmentDisplayController_create(float displayUpdateTime)
+void sevenSegmentDisplayController_create()
 {
-	updateTime = displayUpdateTime;
 	//Init 7-segment Display
 	display_7seg_initialise(NULL);
 	display_7seg_powerUp();

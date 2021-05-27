@@ -13,7 +13,7 @@ carbonDioxideSensor_t carbonDioxideSensor;
 
 void sensorModelManager_create()
 {
-	sevenSegmentDisplayController_create(0.5);
+	sevenSegmentDisplayController_create();
 	
 	//create temperature/humidity sensor controller
 	temperatureSensor = temperatureSensor_create(1);

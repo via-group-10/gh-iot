@@ -2,6 +2,7 @@
 
 typedef struct myTime* myTime_t; 
 
+void myTime_addOneSec();
 myTime_t myTime_create();
 void myTime_updateToNowTime(myTime_t self);
 void myTime_updateNowTime(int year,int mon,int day,int hour,int min, int sec);

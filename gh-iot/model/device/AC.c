@@ -3,7 +3,7 @@
 #include <stdbool.h>
 
 static bool ac_turnOn = false;
-static int ac_turnOnStatue;
+static int ac_turnOnStatue = -1;
 
 void AC_turnOnHeating()
 {

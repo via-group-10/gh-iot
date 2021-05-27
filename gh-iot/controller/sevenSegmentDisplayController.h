@@ -1,3 +1,3 @@
 #pragma once
 
-void sevenSegmentDisplayController_create(float displayUpdateTime);
+void sevenSegmentDisplayController_create();

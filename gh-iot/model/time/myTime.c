@@ -13,28 +13,24 @@ typedef struct myTime{
 	int sec;
 } myTime;
 
-myTime_t nowTime;
+static myTime_t nowTime;
 
-void nowTimeClockTask(void *pvParameters)
+void myTime_addOneSec()
 {
-	while(1)
+	mytime_tryCreateNowTime();
+	nowTime->sec = nowTime->sec += 1;
+	if (nowTime->sec>=60)
 	{
-		vTaskDelay(pdMS_TO_TICKS(1000));
-		nowTime->sec = nowTime->sec += 1;
-		if (nowTime->sec>=60)
+		nowTime->min = nowTime->min += 1;
+		nowTime->sec = 0;
+		if (nowTime->min>=60)
 		{
-			nowTime->min = nowTime->min += 1;
-			nowTime->sec = 0;
-			if (nowTime->min>=60)
+			nowTime->hour = nowTime->hour += 1;
+			nowTime->min = 0;
+			if (nowTime->hour>=24)
 			{
-				nowTime->hour = nowTime->hour += 1;
-				nowTime->min = 0;
-				if (nowTime->hour>=24)
-				{
-					nowTime->hour = 0;
-					//update date from api;
-					
-				}
+				nowTime->hour = 0;
+				//update date from api;	
 			}
 		}
 	}
@@ -53,11 +49,6 @@ void mytime_tryCreateNowTime()
 			nowTime->hour = 0;
 			nowTime->min = 0;
 			nowTime->sec = 0;
-			//update date from api;
-			
-			printf("Now time clock started!!!\n");
-			xTaskCreate(nowTimeClockTask, "NowTimeClockTask", configMINIMAL_STACK_SIZE, (void*)1, tskIDLE_PRIORITY + 1, NULL);
-			//vTaskStartScheduler();
 		}
 	}
 }

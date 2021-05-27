@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-bool hum_turnOn = false;
+static bool hum_turnOn = false;
+
 void HumilityGenerator_turnOn()
 {
 	if (!hum_turnOn)
