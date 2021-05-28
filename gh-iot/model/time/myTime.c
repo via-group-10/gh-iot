@@ -1,7 +1,4 @@
 #include "myTime.h"
-#include <stdlib.h>
-#include <ATMEGA_FreeRTOS.h>
-#include <task.h>
 #include <stdio.h>
 
 typedef struct myTime{
@@ -14,6 +11,23 @@ typedef struct myTime{
 } myTime;
 
 static myTime_t nowTime;
+
+void mytime_tryCreateNowTime()
+{
+	if (NULL == nowTime)
+	{
+		nowTime = calloc(sizeof(myTime), 1);
+		if (NULL != nowTime)
+		{
+			nowTime->year = 0;
+			nowTime->mon = 0;
+			nowTime->day = 0;
+			nowTime->hour = 0;
+			nowTime->min = 0;
+			nowTime->sec = 0;
+		}
+	}
+}
 
 void myTime_addOneSec()
 {
@@ -36,27 +50,11 @@ void myTime_addOneSec()
 	}
 }
 
-void mytime_tryCreateNowTime()
-{
-	if (NULL == nowTime)
-	{
-		nowTime = calloc(sizeof(myTime), 1);
-		if (NULL != nowTime)
-		{
-			nowTime->year = 0;
-			nowTime->mon = 0;
-			nowTime->day = 0;
-			nowTime->hour = 0;
-			nowTime->min = 0;
-			nowTime->sec = 0;
-		}
-	}
-}
-
 myTime_t myTime_create()
 {
 	mytime_tryCreateNowTime();
-	myTime_t newTime = calloc(sizeof(myTime), 1);	if (NULL == newTime)
+	myTime_t newTime = calloc(sizeof(myTime), 1);
+	if (NULL == newTime)
 	{
 		return NULL;
 	}
@@ -75,9 +73,42 @@ void myTime_updateNowTime(int year,int mon,int day,int hour,int min, int sec)
 	nowTime->year = year;
 	nowTime->mon = mon;
 	nowTime->day = day;
-	nowTime->hour = hour;
-	nowTime->min = min;
-	nowTime->sec = sec;
+	if(hour>23)
+	{
+		nowTime->hour = 23;
+	}
+	else if (hour<0)
+	{
+		nowTime->hour = 0;
+	}
+	else
+	{
+		nowTime->hour = hour;
+	}
+	if(min>59)
+	{
+		nowTime->min = 59;
+	}
+	else if (min<0)
+	{
+		nowTime->min = 0;
+	}
+	else
+	{
+		nowTime->min = min;
+	}
+	if(sec>59)
+	{
+		nowTime->sec = 59;
+	}
+	else if (sec<0)
+	{
+		nowTime->sec = 0;
+	}
+	else
+	{
+		nowTime->sec = sec;
+	}
 }
 
 void myTime_updateToNowTime(myTime_t self)

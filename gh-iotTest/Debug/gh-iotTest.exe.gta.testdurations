@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GtaTestDurations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Executable>D:\学习资料\VIA\Study skills for engineers (SSE)&amp;(SEP)\4th semester\gh-iot\gh-iotTest\Debug\gh-iotTest.exe</Executable>
+  <TestDurations>
+    <TestDuration Test="myTimeTest.myTime_addOneSec_zero" Duration="1" />
+    <TestDuration Test="myTimeTest.myTime_addOneSec_one" Duration="1" />
+    <TestDuration Test="myTimeTest.myTime_addOneSec_many" Duration="1" />
+    <TestDuration Test="myTimeTest.myTime_addOneSec_boundary" Duration="1" />
+    <TestDuration Test="TestCaseName.TestName" Duration="1" />
+    <TestDuration Test="myTimeTest.myTime_create_one" Duration="1" />
+    <TestDuration Test="myTimeTest.updateToNowTime_one" Duration="1" />
+    <TestDuration Test="myTimeTest.myTime_updateNowTime_one" Duration="1" />
+    <TestDuration Test="myTimeTest.myTime_updateNowTime_boundary" Duration="1" />
+  </TestDurations>
+</GtaTestDurations>

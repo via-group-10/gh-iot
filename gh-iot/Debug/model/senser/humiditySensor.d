@@ -1,6 +1,7 @@
 model/senser/humiditySensor.d model/senser/humiditySensor.o: \
  ../model/senser/humiditySensor.c ../model/senser/humiditySensor.h \
  ../model/senser/../time/myTime.h \
+ ../model/senser/../device/HumilityGenerator.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../FreeRTOS/src/ATMEGA_FreeRTOS.h \
@@ -26,6 +27,8 @@ model/senser/humiditySensor.d model/senser/humiditySensor.o: \
 ../model/senser/humiditySensor.h:
 
 ../model/senser/../time/myTime.h:
+
+../model/senser/../device/HumilityGenerator.h:
 
 d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 

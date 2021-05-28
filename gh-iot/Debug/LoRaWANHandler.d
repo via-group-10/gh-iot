@@ -1,7 +1,9 @@
 LoRaWANHandler.d LoRaWANHandler.o: .././LoRaWANHandler.c \
  .././model/sensorModelManager.h .././model/senser/temperatureSensor.h \
  .././model/senser/../time/myTime.h .././model/senser/humiditySensor.h \
- .././model/senser/carbonDioxideSensor.h \
+ .././model/senser/carbonDioxideSensor.h ../drivers/../model/device/AC.h \
+ ../drivers/../model/device/HumilityGenerator.h \
+ ../drivers/../model/device/carbonDioxideGenerator.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\inttypes.h \
@@ -22,7 +24,7 @@ LoRaWANHandler.d LoRaWANHandler.o: .././LoRaWANHandler.c \
  ../FreeRTOS/src/FreeRTOSVariant.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\avr\wdt.h \
  ../FreeRTOS/src/ATMEGA_FreeRTOS.h ../FreeRTOS/src/task.h \
- ../FreeRTOS/src/list.h ../drivers/lora_driver.h \
+ ../FreeRTOS/src/list.h ../FreeRTOS/src/queue.h ../drivers/lora_driver.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  ../FreeRTOS/src/message_buffer.h ../FreeRTOS/src/stream_buffer.h \
  ../drivers/serial.h ../drivers/status_leds.h
@@ -36,6 +38,12 @@ LoRaWANHandler.d LoRaWANHandler.o: .././LoRaWANHandler.c \
 .././model/senser/humiditySensor.h:
 
 .././model/senser/carbonDioxideSensor.h:
+
+../drivers/../model/device/AC.h:
+
+../drivers/../model/device/HumilityGenerator.h:
+
+../drivers/../model/device/carbonDioxideGenerator.h:
 
 d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h:
 
@@ -86,6 +94,8 @@ d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../FreeRTOS/src/task.h:
 
 ../FreeRTOS/src/list.h:
+
+../FreeRTOS/src/queue.h:
 
 ../drivers/lora_driver.h:
 

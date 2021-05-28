@@ -15,4 +15,4 @@ void humiditySensor_setMinValue(humiditySensor_t self,float value);
 void humiditySensor_setHumStatus(humiditySensor_t self,float value);
 float humiditySensor_getMaxValue(humiditySensor_t self);
 float humiditySensor_getMinValue(humiditySensor_t self);
-float humiditySensor_getHumStatus(humiditySensor_t self);
+int humiditySensor_getHumStatus(humiditySensor_t self);

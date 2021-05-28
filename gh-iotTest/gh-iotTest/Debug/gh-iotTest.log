@@ -1,0 +1,7 @@
+﻿  temperatureSensor.c
+D:\学习资料\VIA\Study skills for engineers (SSE)&(SEP)\4th semester\gh-iot\gh-iotTest\gh-iotTest\FreeRTOS\Source\include\task.h(2594,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\学习资料\VIA\Study skills for engineers (SSE)&(SEP)\4th semester\gh-iot\gh-iot\model\senser\temperatureSensor.c(33,788): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
+temperatureSensor.obj : error LNK2019: 无法解析的外部符号 _xQueueGenericSend，函数 _temperatureSensor_create 中引用了该符号
+temperatureSensor.obj : error LNK2019: 无法解析的外部符号 _xQueueSemaphoreTake，函数 _temperatureSensor_setReportInterval 中引用了该符号
+temperatureSensor.obj : error LNK2019: 无法解析的外部符号 _xQueueGenericCreate，函数 _temperatureSensor_create 中引用了该符号
+D:\学习资料\VIA\Study skills for engineers (SSE)&(SEP)\4th semester\gh-iot\gh-iotTest\Debug\gh-iotTest.exe : fatal error LNK1120: 3 个无法解析的外部命令

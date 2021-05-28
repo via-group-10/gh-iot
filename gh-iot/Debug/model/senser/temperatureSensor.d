@@ -1,6 +1,6 @@
 model/senser/temperatureSensor.d model/senser/temperatureSensor.o: \
  ../model/senser/temperatureSensor.c ../model/senser/temperatureSensor.h \
- ../model/senser/../time/myTime.h \
+ ../model/senser/../time/myTime.h ../model/senser/../device/AC.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../FreeRTOS/src/ATMEGA_FreeRTOS.h \
@@ -26,6 +26,8 @@ model/senser/temperatureSensor.d model/senser/temperatureSensor.o: \
 ../model/senser/temperatureSensor.h:
 
 ../model/senser/../time/myTime.h:
+
+../model/senser/../device/AC.h:
 
 d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 

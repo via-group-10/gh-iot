@@ -113,10 +113,10 @@ float humiditySensor_getMinValue(humiditySensor_t self)
 	xSemaphoreGive(self->readWriteSemaphore);
 	return result;
 }
-float humiditySensor_getHumStatus(humiditySensor_t self)
+int humiditySensor_getHumStatus(humiditySensor_t self)
 {
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
-	float result = self->humstatus;
+	int result = self->humstatus;
 	xSemaphoreGive(self->readWriteSemaphore);
 	return result;
 }
