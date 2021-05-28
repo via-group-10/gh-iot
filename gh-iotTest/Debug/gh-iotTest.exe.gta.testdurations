@@ -11,5 +11,6 @@
     <TestDuration Test="myTimeTest.updateToNowTime_one" Duration="1" />
     <TestDuration Test="myTimeTest.myTime_updateNowTime_one" Duration="1" />
     <TestDuration Test="myTimeTest.myTime_updateNowTime_boundary" Duration="1" />
+    <TestDuration Test="temperatureSensorTest.temperatureSensor_create_one" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

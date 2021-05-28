@@ -1,6 +1,7 @@
 model/senser/carbonDioxideSensor.d model/senser/carbonDioxideSensor.o: \
  ../model/senser/carbonDioxideSensor.c \
  ../model/senser/carbonDioxideSensor.h ../model/senser/../time/myTime.h \
+ ../model/senser/../device/carbonDioxideGenerator.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stddef.h \
  ../FreeRTOS/src/ATMEGA_FreeRTOS.h \
@@ -26,6 +27,8 @@ model/senser/carbonDioxideSensor.d model/senser/carbonDioxideSensor.o: \
 ../model/senser/carbonDioxideSensor.h:
 
 ../model/senser/../time/myTime.h:
+
+../model/senser/../device/carbonDioxideGenerator.h:
 
 d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdlib.h:
 

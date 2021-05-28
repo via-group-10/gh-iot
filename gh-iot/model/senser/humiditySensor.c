@@ -22,7 +22,14 @@ humiditySensor_t humiditySensor_create(float reportInterval)
 	{
 		return NULL;
 	}
-	newhumiditySensor->reportInterval = reportInterval;
+	if(reportInterval>0)
+	{
+		newhumiditySensor->reportInterval = reportInterval;
+	}
+	else
+	{
+		newhumiditySensor->reportInterval = 1;
+	}
 	newhumiditySensor->value = 0.0;
 	newhumiditySensor->humstatus = 0;
 	newhumiditySensor->updateTime = myTime_create();

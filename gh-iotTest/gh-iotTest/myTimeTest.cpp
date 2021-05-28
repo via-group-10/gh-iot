@@ -3,6 +3,19 @@ extern "C" {
 #include "../../gh-iot/model/time/myTime.h"
 }
 
+class myTimeTest : public ::testing::Test {
+protected:
+	void SetUp() override
+	{
+
+	}
+
+	void TearDown() override
+	{
+
+	}
+};
+
 TEST(myTimeTest, myTime_addOneSec_zero) {
 	EXPECT_EQ(myTime_getHour(myTime_getNowTime()), 0);
 	EXPECT_EQ(myTime_getMin(myTime_getNowTime()), 0);

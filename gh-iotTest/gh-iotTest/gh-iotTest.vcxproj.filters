@@ -23,6 +23,21 @@
     <ClCompile Include="..\..\gh-iot\model\device\HumilityGenerator.c">
       <Filter>model\device</Filter>
     </ClCompile>
+    <ClCompile Include="FreeRTOS\Source\portable\MSVC-MingW\port.c" />
+    <ClCompile Include="FreeRTOS\Source\croutine.c" />
+    <ClCompile Include="FreeRTOS\Source\event_groups.c" />
+    <ClCompile Include="FreeRTOS\Source\heap_4.c" />
+    <ClCompile Include="FreeRTOS\Source\list.c" />
+    <ClCompile Include="FreeRTOS\Source\queue.c" />
+    <ClCompile Include="FreeRTOS\Source\stream_buffer.c" />
+    <ClCompile Include="FreeRTOS\Source\tasks.c" />
+    <ClCompile Include="FreeRTOS\Source\timers.c" />
+    <ClCompile Include="..\..\gh-iot\model\senser\carbonDioxideSensor.c">
+      <Filter>model\senser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gh-iot\model\senser\humiditySensor.c">
+      <Filter>model\senser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -57,6 +72,32 @@
     </ClInclude>
     <ClInclude Include="..\..\gh-iot\model\device\HumilityGenerator.h">
       <Filter>model\device</Filter>
+    </ClInclude>
+    <ClInclude Include="FreeRTOS\Source\include\atomic.h" />
+    <ClInclude Include="FreeRTOS\Source\include\croutine.h" />
+    <ClInclude Include="FreeRTOS\Source\include\deprecated_definitions.h" />
+    <ClInclude Include="FreeRTOS\Source\include\event_groups.h" />
+    <ClInclude Include="FreeRTOS\Source\include\FreeRTOS.h" />
+    <ClInclude Include="FreeRTOS\Source\include\FreeRTOSConfig.h" />
+    <ClInclude Include="FreeRTOS\Source\include\list.h" />
+    <ClInclude Include="FreeRTOS\Source\include\message_buffer.h" />
+    <ClInclude Include="FreeRTOS\Source\include\mpu_prototypes.h" />
+    <ClInclude Include="FreeRTOS\Source\include\mpu_wrappers.h" />
+    <ClInclude Include="FreeRTOS\Source\include\portable.h" />
+    <ClInclude Include="FreeRTOS\Source\include\projdefs.h" />
+    <ClInclude Include="FreeRTOS\Source\include\queue.h" />
+    <ClInclude Include="FreeRTOS\Source\include\semphr.h" />
+    <ClInclude Include="FreeRTOS\Source\include\stack_macros.h" />
+    <ClInclude Include="FreeRTOS\Source\include\StackMacros.h" />
+    <ClInclude Include="FreeRTOS\Source\include\stream_buffer.h" />
+    <ClInclude Include="FreeRTOS\Source\include\task.h" />
+    <ClInclude Include="FreeRTOS\Source\include\timers.h" />
+    <ClInclude Include="FreeRTOS\Source\portable\MSVC-MingW\portmacro.h" />
+    <ClInclude Include="..\..\gh-iot\model\senser\carbonDioxideSensor.h">
+      <Filter>model\senser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gh-iot\model\senser\humiditySensor.h">
+      <Filter>model\senser</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
