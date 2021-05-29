@@ -17,6 +17,7 @@ typedef struct temperatureSensor {
 
 temperatureSensor_t temperatureSensor_create(float reportInterval)
 {
+	
 	temperatureSensor_t newTemperatureSensor = calloc(sizeof(temperatureSensor), 1);
 	if (NULL == newTemperatureSensor)
 	{
@@ -50,6 +51,7 @@ void temperatureSensor_setReportInterval(temperatureSensor_t self, float reportI
 
 void temperatureSensor_setValue(temperatureSensor_t self, float value)
 {
+	//!
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
 	self->value = value;
 	if (self->tempstatus == 1)
@@ -72,6 +74,7 @@ void temperatureSensor_setValue(temperatureSensor_t self, float value)
 }
 void temperatureSensor_setmaxValue(temperatureSensor_t self, float value)
 {
+	//!
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
 	self->maxTemp = value;
 	self->tempstatus = 1;
@@ -80,6 +83,7 @@ void temperatureSensor_setmaxValue(temperatureSensor_t self, float value)
 }
 void temperatureSensor_setminValue(temperatureSensor_t self, float value)
 {
+	//!
 	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
 	self->minTemp = value;
 	self->tempstatus = 1;
@@ -139,4 +143,11 @@ myTime_t temperatureSensor_getUpdateTime(temperatureSensor_t self)
 	myTime_t result = self->updateTime;
 	xSemaphoreGive(self->readWriteSemaphore);
 	return result;
+}
+int getTempstatus(temperatureSensor_t self)
+{
+	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
+	int tempStatus = self->tempstatus;
+	xSemaphoreGive(self->readWriteSemaphore);
+	return tempStatus;
 }
