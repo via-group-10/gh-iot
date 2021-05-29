@@ -47,6 +47,12 @@
     <ClCompile Include="HumilityGeneratorTest.cpp">
       <Filter>model\device</Filter>
     </ClCompile>
+    <ClCompile Include="carbonDioxideSensorTest.cpp">
+      <Filter>model\senser</Filter>
+    </ClCompile>
+    <ClCompile Include="humiditySensorTest.cpp">
+      <Filter>model\senser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

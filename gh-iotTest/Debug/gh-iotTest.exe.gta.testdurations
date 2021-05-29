@@ -12,5 +12,29 @@
     <TestDuration Test="myTimeTest.myTime_updateNowTime_one" Duration="1" />
     <TestDuration Test="myTimeTest.myTime_updateNowTime_boundary" Duration="1" />
     <TestDuration Test="temperatureSensorTest.temperatureSensor_create_one" Duration="1" />
+    <TestDuration Test="ACTest.AC_turnOnHeatingOne" Duration="1" />
+    <TestDuration Test="ACTest.AC_turnOnCoolingOne" Duration="1" />
+    <TestDuration Test="ACTest.AC_turnOffOne" Duration="1" />
+    <TestDuration Test="ACTest.AC_getStateCodeOne" Duration="1" />
+    <TestDuration Test="carbonDioxideGeneratorTest.carbonDioxideGenerator_turnOnOne" Duration="1" />
+    <TestDuration Test="carbonDioxideGeneratorTest.carbonDioxideGenerator_turnOffOne" Duration="1" />
+    <TestDuration Test="carbonDioxideGeneratorTest.carbonDioxideGenerator_getStateCodeOne" Duration="1" />
+    <TestDuration Test="carbonDioxideSensorTest.carbonDioxideSensor_create_One" Duration="1" />
+    <TestDuration Test="carbonDioxideSensorTest.carbonDioxideSensor_create_Boundary" Duration="1" />
+    <TestDuration Test="carbonDioxideSensorTest.carbonDioxideSensor_setMaxValue" Duration="1" />
+    <TestDuration Test="carbonDioxideSensorTest.carbonDioxideSensor_setMinValue" Duration="1" />
+    <TestDuration Test="carbonDioxideSensorTest.carbonDioxideSensor_setValue_Boundary" Duration="1" />
+    <TestDuration Test="humiditySensorTest.humiditySensor_create_One" Duration="1" />
+    <TestDuration Test="humiditySensorTest.humiditySensor_create_Boundary" Duration="1" />
+    <TestDuration Test="humiditySensorTest.humiditySensor_setMaxValue_One" Duration="1" />
+    <TestDuration Test="humiditySensorTest.humiditySensor_setMinValue_One" Duration="1" />
+    <TestDuration Test="humiditySensorTest.humiditySensor_setValue_Boundary" Duration="1" />
+    <TestDuration Test="HumilityGeneratorTest.HumilityDioxideGenerator_turnOnOne" Duration="1" />
+    <TestDuration Test="HumilityGeneratorTest.HumilityDioxideGenerator_turnOffOne" Duration="1" />
+    <TestDuration Test="HumilityGeneratorTest.HumilityDioxideGenerator_getStateCodeOne" Duration="1" />
+    <TestDuration Test="temperatureSensorTest.temperatureSensor_create_boundary" Duration="1" />
+    <TestDuration Test="temperatureSensorTest.temperatureSensor_setMaxValueTest_One" Duration="1" />
+    <TestDuration Test="temperatureSensorTest.temperatureSensor_setMinValueTest_One" Duration="1" />
+    <TestDuration Test="temperatureSensorTest.temperatureSensor_setValue_Boundary" Duration="1" />
   </TestDurations>
 </GtaTestDurations>

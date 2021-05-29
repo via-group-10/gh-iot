@@ -1,2 +1,4 @@
-﻿  HumilityGeneratorTest.cpp
+﻿  humiditySensor.c
+D:\学习资料\VIA\Study skills for engineers (SSE)&(SEP)\4th semester\gh-iot\gh-iotTest\gh-iotTest\FreeRTOS\Source\include\task.h(2594,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+D:\学习资料\VIA\Study skills for engineers (SSE)&(SEP)\4th semester\gh-iot\gh-iot\model\senser\humiditySensor.c(67,25): warning C4244: “=”: 从“float”转换到“int”，可能丢失数据
   gh-iotTest.vcxproj -> D:\学习资料\VIA\Study skills for engineers (SSE)&(SEP)\4th semester\gh-iot\gh-iotTest\Debug\gh-iotTest.exe

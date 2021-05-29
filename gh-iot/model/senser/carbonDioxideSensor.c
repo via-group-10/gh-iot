@@ -22,6 +22,7 @@ carbonDioxideSensor_t carbonDioxideSensor_create(float reportInterval)
 	{
 		return NULL;
 	}
+
 	if(reportInterval>0)
 	{
 		newcarbonDioxideSensor->reportInterval = reportInterval;
@@ -30,6 +31,7 @@ carbonDioxideSensor_t carbonDioxideSensor_create(float reportInterval)
 	{
 		newcarbonDioxideSensor->reportInterval = 1;
 	}
+
 	newcarbonDioxideSensor->value = 0;
 	newcarbonDioxideSensor->co2status = 0;
 	newcarbonDioxideSensor->updateTime = myTime_create();
