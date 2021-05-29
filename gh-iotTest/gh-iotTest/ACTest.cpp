@@ -16,19 +16,22 @@ protected:
 	}
 };
 
-TEST(ACTest, AC_turnOnHeating) {
+TEST(ACTest, AC_turnOnHeatingOne) {
 	AC_turnOnHeating();
 	EXPECT_EQ(AC_getStateCode(), 1);
 }
-TEST(ACTest, AC_turnOnCooling) {
+
+TEST(ACTest, AC_turnOnCoolingOne) {
 	AC_turnOnCooling();
 	EXPECT_EQ(AC_getStateCode(), 0);
 }
-TEST(ACTest, AC_turnOff) {
+
+TEST(ACTest, AC_turnOffOne) {
 	AC_turnOff();
 	EXPECT_EQ(AC_getStateCode(), -1);
 }
-TEST(ACTest, AC_getStateCode) {
+
+TEST(ACTest, AC_getStateCodeOne) {
 	AC_turnOnHeating();
 	EXPECT_EQ(AC_getStateCode(), 1);
 	AC_turnOnCooling();

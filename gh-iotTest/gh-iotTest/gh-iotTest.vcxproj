@@ -43,6 +43,8 @@
     <ClCompile Include="..\..\gh-iot\model\senser\humiditySensor.c" />
     <ClCompile Include="..\..\gh-iot\model\senser\temperatureSensor.c" />
     <ClCompile Include="..\..\gh-iot\model\time\myTime.c" />
+    <ClCompile Include="ACTest.cpp" />
+    <ClCompile Include="carbonDioxideGeneratorTest.cpp" />
     <ClCompile Include="FreeRTOS\Source\croutine.c" />
     <ClCompile Include="FreeRTOS\Source\event_groups.c" />
     <ClCompile Include="FreeRTOS\Source\heap_4.c" />
@@ -52,6 +54,7 @@
     <ClCompile Include="FreeRTOS\Source\stream_buffer.c" />
     <ClCompile Include="FreeRTOS\Source\tasks.c" />
     <ClCompile Include="FreeRTOS\Source\timers.c" />
+    <ClCompile Include="HumilityGeneratorTest.cpp" />
     <ClCompile Include="myTimeTest.cpp" />
     <ClCompile Include="temperatureSensorTest.cpp" />
     <ClCompile Include="test.cpp" />

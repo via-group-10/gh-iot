@@ -38,6 +38,15 @@
     <ClCompile Include="..\..\gh-iot\model\senser\humiditySensor.c">
       <Filter>model\senser</Filter>
     </ClCompile>
+    <ClCompile Include="ACTest.cpp">
+      <Filter>model\device</Filter>
+    </ClCompile>
+    <ClCompile Include="carbonDioxideGeneratorTest.cpp">
+      <Filter>model\device</Filter>
+    </ClCompile>
+    <ClCompile Include="HumilityGeneratorTest.cpp">
+      <Filter>model\device</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -15,18 +15,21 @@ protected:
 
 	}
 };
-TEST(HumilityGeneratorTest, HumilityDioxideGenerator_turnOn) {
+
+TEST(HumilityGeneratorTest, HumilityDioxideGenerator_turnOnOne) {
 	HumilityGenerator_turnOn();
-	EXPECT_EQ(HumilityGenerator_getStateCode, 0);
+	EXPECT_EQ(HumilityGenerator_getStateCode(), 0);
 }
-TEST(HumilityGeneratorTest, HumilityDioxideGenerator_turnOff) {
+
+TEST(HumilityGeneratorTest, HumilityDioxideGenerator_turnOffOne) {
 	HumilityGenerator_turnOff();
-	EXPECT_EQ(HumilityGenerator_getStateCode, -1);
+	EXPECT_EQ(HumilityGenerator_getStateCode(), -1);
 }
-TEST(HumilityGeneratorTest, HumilityDioxideGenerator_getStateCode) {
+
+TEST(HumilityGeneratorTest, HumilityDioxideGenerator_getStateCodeOne) {
 	HumilityGenerator_turnOn();
-	EXPECT_EQ(HumilityGenerator_getStateCode, 0);
+	EXPECT_EQ(HumilityGenerator_getStateCode(), 0);
 	HumilityGenerator_turnOff();
-	EXPECT_EQ(HumilityGenerator_getStateCode, -1);
+	EXPECT_EQ(HumilityGenerator_getStateCode(), -1);
 }
 

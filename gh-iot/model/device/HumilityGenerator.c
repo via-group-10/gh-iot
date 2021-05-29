@@ -12,6 +12,7 @@ void HumilityGenerator_turnOn()
 		printf("humidifier £ºTurn on");
 	}
 }
+
 void HumilityGenerator_turnOff()
 {
 	if (hum_turnOn)

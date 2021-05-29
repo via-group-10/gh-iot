@@ -15,17 +15,20 @@ protected:
 
 	}
 };
-TEST(carbonDioxideGeneratorTest, carbonDioxideGenerator_turnOn) {
+
+TEST(carbonDioxideGeneratorTest, carbonDioxideGenerator_turnOnOne) {
 	carbonDioxideGenerator_turnOn();
-	EXPECT_EQ(carbonDioxideGenerator_getStateCode, 0);
+	EXPECT_EQ(carbonDioxideGenerator_getStateCode(), 0);
 }
-TEST(carbonDioxideGeneratorTest, carbonDioxideGenerator_turnOff) {
+
+TEST(carbonDioxideGeneratorTest, carbonDioxideGenerator_turnOffOne) {
 	carbonDioxideGenerator_turnOff();
-	EXPECT_EQ(carbonDioxideGenerator_getStateCode, -1);
+	EXPECT_EQ(carbonDioxideGenerator_getStateCode(), -1);
 }
-TEST(carbonDioxideGeneratorTest, carbonDioxideGenerator_getStateCode) {
+
+TEST(carbonDioxideGeneratorTest, carbonDioxideGenerator_getStateCodeOne) {
 	carbonDioxideGenerator_turnOn();
-	EXPECT_EQ(carbonDioxideGenerator_getStateCode, 0);
+	EXPECT_EQ(carbonDioxideGenerator_getStateCode(), 0);
 	carbonDioxideGenerator_turnOff();
-	EXPECT_EQ(carbonDioxideGenerator_getStateCode, -1);
+	EXPECT_EQ(carbonDioxideGenerator_getStateCode(), -1);
 }
