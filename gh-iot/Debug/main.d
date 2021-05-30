@@ -25,9 +25,9 @@ main.d main.o: .././main.c \
  ../FreeRTOS/src/queue.h ../drivers/hih8120.h \
  d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\gcc\avr\5.4.0\include\stdbool.h \
  ../drivers/stdio_driver.h ../drivers/serial.h ../drivers/lora_driver.h \
- ../drivers/status_leds.h .././model/sensorModelManager.h \
- .././model/senser/temperatureSensor.h .././model/senser/../time/myTime.h \
- .././model/senser/humiditySensor.h \
+ ../drivers/status_leds.h .././model/device/rcServo.h \
+ .././model/sensorModelManager.h .././model/senser/temperatureSensor.h \
+ .././model/senser/../time/myTime.h .././model/senser/humiditySensor.h \
  .././model/senser/carbonDioxideSensor.h
 
 d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdio.h:
@@ -103,6 +103,8 @@ d:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\lib\
 ../drivers/lora_driver.h:
 
 ../drivers/status_leds.h:
+
+.././model/device/rcServo.h:
 
 .././model/sensorModelManager.h:
 

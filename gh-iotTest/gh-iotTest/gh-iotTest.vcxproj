@@ -39,6 +39,7 @@
     <ClCompile Include="..\..\gh-iot\model\device\AC.c" />
     <ClCompile Include="..\..\gh-iot\model\device\carbonDioxideGenerator.c" />
     <ClCompile Include="..\..\gh-iot\model\device\HumilityGenerator.c" />
+    <ClCompile Include="..\..\gh-iot\model\device\rcServo.c" />
     <ClCompile Include="..\..\gh-iot\model\senser\carbonDioxideSensor.c" />
     <ClCompile Include="..\..\gh-iot\model\senser\humiditySensor.c" />
     <ClCompile Include="..\..\gh-iot\model\senser\temperatureSensor.c" />
@@ -58,6 +59,7 @@
     <ClCompile Include="humiditySensorTest.cpp" />
     <ClCompile Include="HumilityGeneratorTest.cpp" />
     <ClCompile Include="myTimeTest.cpp" />
+    <ClCompile Include="rc_servo.c" />
     <ClCompile Include="temperatureSensorTest.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
@@ -68,6 +70,7 @@
     <ClInclude Include="..\..\gh-iot\model\device\AC.h" />
     <ClInclude Include="..\..\gh-iot\model\device\carbonDioxideGenerator.h" />
     <ClInclude Include="..\..\gh-iot\model\device\HumilityGenerator.h" />
+    <ClInclude Include="..\..\gh-iot\model\device\rcServo.h" />
     <ClInclude Include="..\..\gh-iot\model\senser\carbonDioxideSensor.h" />
     <ClInclude Include="..\..\gh-iot\model\senser\humiditySensor.h" />
     <ClInclude Include="..\..\gh-iot\model\senser\temperatureSensor.h" />
@@ -93,6 +96,7 @@
     <ClInclude Include="FreeRTOS\Source\include\task.h" />
     <ClInclude Include="FreeRTOS\Source\include\timers.h" />
     <ClInclude Include="FreeRTOS\Source\portable\MSVC-MingW\portmacro.h" />
+    <ClInclude Include="rc_servo.h" />
   </ItemGroup>
   <ItemDefinitionGroup />
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

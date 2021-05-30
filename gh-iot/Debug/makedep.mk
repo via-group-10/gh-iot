@@ -14,6 +14,8 @@ model\device\carbonDioxideGenerator.c
 
 model\device\HumilityGenerator.c
 
+model\device\rcServo.c
+
 model\senser\carbonDioxideSensor.c
 
 model\senser\humiditySensor.c

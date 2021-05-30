@@ -1,6 +1,7 @@
 #include "AC.h"
 #include <stdio.h>
 #include <stdbool.h>
+#include "rcServo.h"
 
 static bool ac_turnOn = false;
 static int ac_turnOnStatue = -1;
@@ -12,6 +13,7 @@ void AC_turnOnHeating()
 		ac_turnOn = true;
 		ac_turnOnStatue = 1;
 		printf("AC £ºTurn on heating");
+		rcServo_turnLeft(0,50);
 	}
 }
 
@@ -22,6 +24,7 @@ void AC_turnOnCooling()
 		ac_turnOn = true;
 		ac_turnOnStatue = 0;
 		printf("AC £ºTurn on cooling");
+		rcServo_turnRight(0,50);
 	}
 }
 
@@ -31,6 +34,7 @@ void AC_turnOff()
 	{
 		ac_turnOn = false;
 		printf("AC : Turn off");
+		rcServo_backToZero(0);
 	}
 }
 

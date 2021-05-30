@@ -254,6 +254,12 @@
     <Compile Include="model\device\HumilityGenerator.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="model\device\rcServo.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="model\device\rcServo.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="model\senser\carbonDioxideSensor.c">
       <SubType>compile</SubType>
     </Compile>

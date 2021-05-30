@@ -21,6 +21,7 @@
 // Needed for LoRaWAN
 #include <lora_driver.h>
 #include <status_leds.h>
+#include "model/device/rcServo.h"
 
 #include "model/sensorModelManager.h"
 
@@ -62,6 +63,7 @@ void initialiseSystem()
 	
 	downLinkMessageBufferHandle = xMessageBufferCreate(sizeof(lora_driver_payload_t)*2);
 	lora_driver_initialise(ser_USART1, downLinkMessageBufferHandle);
+	rcServo_init();
 }
 
 /*-----------------------------------------------------------*/

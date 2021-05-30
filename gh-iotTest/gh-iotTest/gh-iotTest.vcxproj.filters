@@ -14,9 +14,6 @@
     <ClCompile Include="..\..\gh-iot\model\senser\temperatureSensor.c">
       <Filter>model\senser</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\gh-iot\model\device\AC.c">
-      <Filter>model\device</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\gh-iot\model\device\carbonDioxideGenerator.c">
       <Filter>model\device</Filter>
     </ClCompile>
@@ -53,6 +50,15 @@
     <ClCompile Include="humiditySensorTest.cpp">
       <Filter>model\senser</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\gh-iot\model\device\AC.c">
+      <Filter>model\device</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\gh-iot\model\device\rcServo.c">
+      <Filter>model\device</Filter>
+    </ClCompile>
+    <ClCompile Include="rc_servo.c">
+      <Filter>model\device</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -79,9 +85,6 @@
       <Filter>model\senser</Filter>
     </ClInclude>
     <ClInclude Include="ATMEGA_FreeRTOS.h" />
-    <ClInclude Include="..\..\gh-iot\model\device\AC.h">
-      <Filter>model\device</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\gh-iot\model\device\carbonDioxideGenerator.h">
       <Filter>model\device</Filter>
     </ClInclude>
@@ -113,6 +116,15 @@
     </ClInclude>
     <ClInclude Include="..\..\gh-iot\model\senser\humiditySensor.h">
       <Filter>model\senser</Filter>
+    </ClInclude>
+    <ClInclude Include="rc_servo.h">
+      <Filter>model\device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gh-iot\model\device\AC.h">
+      <Filter>model\device</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\gh-iot\model\device\rcServo.h">
+      <Filter>model\device</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
