@@ -144,10 +144,3 @@ myTime_t temperatureSensor_getUpdateTime(temperatureSensor_t self)
 	xSemaphoreGive(self->readWriteSemaphore);
 	return result;
 }
-int getTempstatus(temperatureSensor_t self)
-{
-	xSemaphoreTake(self->readWriteSemaphore, portMAX_DELAY);
-	int tempStatus = self->tempstatus;
-	xSemaphoreGive(self->readWriteSemaphore);
-	return tempStatus;
-}
