@@ -223,7 +223,7 @@ void lora_handler_task( void *pvParameters )
 			//printf("Upload Message >%s<\n", lora_driver_mapReturnCodeToText(lora_driver_sendUploadMessage(false, &_uplink_payload)));
 		}
 		PORTA ^= _BV(PA2);
-		//wait 1 min
+		//wait 300 sec (5min)
 		vTaskDelay(pdMS_TO_TICKS(300000));
 		//lora_handler_downlink();
 	}
