@@ -224,7 +224,7 @@ void lora_handler_task( void *pvParameters )
 		}
 		PORTA ^= _BV(PA2);
 		//wait 1 min
-		vTaskDelay(pdMS_TO_TICKS(6000));
+		vTaskDelay(pdMS_TO_TICKS(30000));
 		//lora_handler_downlink();
 	}
 }
